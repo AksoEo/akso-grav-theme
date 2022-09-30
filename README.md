@@ -12,3 +12,4 @@ Browserslist `>= 2%`:
 
 ## Installation
 Run `npm run build` upon installation to compile the CSS.
+Also run `composer install` to install php dependencies.
