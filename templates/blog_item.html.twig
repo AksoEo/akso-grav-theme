@@ -1,0 +1,51 @@
+{% extends 'partials/base.html.twig' %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
+{% set show_sidebar = header_var('show_sidebar', [page, blog])|defined(true)  %}
+{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
+{% set hero_image_name = page.header.header_image_file %}
+
+{% set header_contents %}
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.header.subtitle %}
+    <h3>{{ page.header.subtitle }}</h3>
+    {% endif %}
+    <p>
+        <time class="bli-published" datetime="{{ page.date|date("c") }}">
+            {#{ page.date|date(system.pages.dateformat.short) }#}
+            {{ page.date|date("Y-m-d") }}
+        </time>
+    </p>
+    {#% include 'partials/blog/taxonomy.html.twig' %#}
+{% endset %}
+
+{% block content %}
+    {% if hero_image_name %}
+    {% set hero_image = page.media[hero_image_name] %}
+    <figure class="blog-cover-header full-width carousel">
+        <p>
+            {{hero_image.html|raw}}
+        </p>
+        {{ header_contents }}
+    </figure>
+    {% else %}
+    <div class="blog-header">
+        {{ header_contents }}
+    </div>
+    {% endif %}
+    <div class="blog-container">
+        <div class="e-content">
+            {{ page.content|raw }}
+        </div>
+    </div>
+
+    <p class="blog-prev-next">
+        {% if not page.isLast %}
+        <a class="link-button" href="{{ page.prevSibling.url }}"><i class="fa fa-angle-left"></i> {{ 'THEME_TEJO.BLOG.ITEM.PREV_POST'|t }}</a>
+        {% endif %}
+
+        {% if not page.isFirst %}
+        <a class="link-button" href="{{ page.nextSibling.url }}">{{ 'THEME_TEJO.BLOG.ITEM.NEXT_POST'|t }} <i class="fa fa-angle-right"></i></a>
+        {% endif %}
+    </p>
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="blog-list-item" role="article" aria-label="{{ page.title }}">
+    {#% set image = page.media.images|first %#}
+    {% set image = 0 %}
+    {% if image %}
+    <div class="bli-image">
+        <a href="{{ page.url }}">{{ image.cropZoom(800,400).html|raw }}</a>
+    </div>
+    {% endif %}
+    <div class="bli-header">
+        <h3 class="bli-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
+        <div class="bli-date">
+            <time class="bli-published" datetime="{{ page.date|date("c") }}">
+                {#{ page.date|date(system.pages.dateformat.short) }#}
+                {{ page.date|date("Y-m-d") }}
+            </time>
+        </div>
+    </div>
+    <div class="bli-summary">
+        {% if page.summary != page.content %}
+            {{ page.summary|raw }}
+        {% else %}
+            {{ page.content|raw }}
+        {% endif %}
+        <div class="bli-read-more">
+            <a href="{{page.url}}">{{ 'THEME_TEJO.BLOG.ITEM.CONTINUE_READING'|t }}</a>
+        </div>
+    </div>
+    <div class="card-footer">
+        {#% include 'partials/blog/taxonomy.html.twig' %#}
+    </div>
+</div>
+

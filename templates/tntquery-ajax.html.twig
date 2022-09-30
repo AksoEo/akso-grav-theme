@@ -1,0 +1,45 @@
+<section class="search-results" aria-label="{{ "THEME_TEJO.TNTSEARCH.RESULTS_TITLE"|t }}">
+    {# filter results based on where the search page is located #}
+    {# TODO: proper filtering? #}
+    {% set search_loc = page.route|split('/')|slice(0, -1)|join('/') %}
+    {% set result_count = tntsearch_results.number_of_hits %}
+    {% set filtered_results = tntsearch_results.hits %}
+    {% if search_loc is not empty %}
+        {% set filtered_results = [] %}
+        {% for result in tntsearch_results.hits %}
+            {% if result.link starts with search_loc %}
+                {% set filtered_results = filtered_results|merge([result]) %}
+            {% endif %}
+        {% endfor %}
+        {% set result_count = count(filtered_results) %}
+    {% endif %}
+
+    <p class="results-meta">
+        {% if config.get('plugins.tntsearch.display_hits') %}
+        <span class="hits">
+            {% if result_count == 1 %}
+            {{ "THEME_TEJO.TNTSEARCH.FOUND_RESULT"|t|raw }}
+            {% else %}
+            {{ "THEME_TEJO.TNTSEARCH.FOUND_RESULTS"|t(result_count)|raw }}
+            {% endif %}
+        </span>
+        {% endif %}
+        {% if config.get('plugins.tntsearch.display_time') %}
+            <span class="time">{{ "THEME_TEJO.TNTSEARCH.FOUND_IN_TIME"|t(tntsearch_results.execution_time)|raw }}</span>
+        {% endif %}
+    </p>
+
+    <ul class="results-list" role="list">
+        {% for key, val in filtered_results %}
+        <li role="listitem" class="search-result">
+            <h4 class="result-title">
+                <a href="{{ base_url ~ val.link }}">{{ val.title|raw }}</a>
+            </h4>
+            {% if config.get('plugins.tntsearch.display_route') %}
+                <h6 class="result-route">{{ val.link|raw }}</h6>
+            {% endif %}
+            <p class="result-contents">{{ val.content|raw }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</section>

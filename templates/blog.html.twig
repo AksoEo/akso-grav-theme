@@ -1,0 +1,33 @@
+{% extends 'partials/base.html.twig' %}
+{% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
+{% set collection = page.collection() %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+
+{% block content %}
+    {{ page.content|raw }}
+
+    <div class="blog-entry-list">
+    {% with {blog: page} %}
+        {% if config.plugins.pagination.enabled and collection.params.pagination %}
+            <div class="listing-header">
+                {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+            </div>
+        {% endif %}
+
+        <div class="blog-entries">
+        {% for child in collection %}
+            {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+        {% endfor %}
+        </div>
+
+        {% if config.plugins.pagination.enabled and collection.params.pagination %}
+            <div class="listing-footer">
+                {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+{% endblock %}
+
+
+

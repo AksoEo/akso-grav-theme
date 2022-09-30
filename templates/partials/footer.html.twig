@@ -1,0 +1,25 @@
+<footer id="page-footer" aria-label="{{ "THEME_TEJO.NAVIGATION.FOOTER"|t }}">
+    <ul class="footer-social">
+        {% for p in grav.theme.config.footerSocial %}
+            <li>
+                <a target="_blank" rel="noreferrer" href="{{ p.url }}" class="footer-social-link">
+                    <img src="{{ url("theme://images/social/#{p.id}.svg") }}" alt="{{ p.name|e('html_attr') }}" title="{{ p.name|e('html_attr') }}" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% for ln in grav.theme.config.footerLines %}
+        <div class="footer-line">
+            {{ ln }}
+        </div>
+    {% endfor %}
+    <ul class="footer-metadata">
+        {% for p in grav.theme.config.footerData %}
+            <li>
+                <span class="footer-metadata-label">{{ p.label|e }}:</span>
+                <a href="{{ p.url|e('html_attr') }}" class="footer-metadata-link">{{ p.value|e }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="mailto:{{ grav.theme.config.footerMail|e('html_attr') }}">{{ grav.theme.config.footerMail|e }}</a>
+</footer>

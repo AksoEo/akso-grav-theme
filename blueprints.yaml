@@ -1,0 +1,88 @@
+name: TEJO
+version: 0.1.0
+description: Por la nova retejo de TEJO
+icon: rebel
+author:
+  name: Tutmonda Esperantista Junulara Organizo
+  email: helpo@akso.org
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    nav_dropdown:
+      type: toggle
+      label: Nav Dropdown
+      default: 0
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    logoAlt:
+        type: string
+        label: Logo Alt-Text
+        highlight: 1
+        default: "alt-text goes here"
+        validate:
+          type: string
+    logoSubtitle:
+        type: string
+        label: Logo Subtitle
+        highlight: 1
+        default: "subtitle goes here"
+        validate:
+          type: string
+    footerLines:
+        type: array
+        label: Footer Lines
+        default: []
+        value_only: true
+        placeholder_value: "line contents go here"
+        validate:
+          type: array
+    footerData:
+        type: list
+        style: vertical
+        label: Footer Metadata
+        fields:
+          .label:
+            type: text
+            label: Label
+          .value:
+            type: text
+            label: Link Text
+          .url:
+            type: text
+            label: Link
+    footerSocial:
+        type: list
+        style: vertical
+        label: Footer Social Links
+        fields:
+          .id:
+            type: text
+            label: Icon Name
+          .name:
+            type: text
+            label: Alt-Text
+          .url:
+            type: text
+            label: Link
+    footerMail:
+        type: email
+        label: Footer Email
+        default: "example@example.com"
+    search_path:
+      type: text
+      label: Global Search Path
+    search_label:
+      type: text
+      label: Global Search Label
+    support_link:
+      type: text
+      label: Support Button Link
+    support_label:
+      type: text
+      label: Support Button Label

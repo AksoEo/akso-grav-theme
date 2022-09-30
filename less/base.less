@@ -1,0 +1,211 @@
+@import './prelude';
+
+@font-face {
+    font-family: Roboto;
+    src: url('../fonts/roboto/Roboto-Regular.woff2') format('woff2'),
+        url('../fonts/roboto/Roboto-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: Roboto;
+    font-weight: bold;
+    src: url('../fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+    url('../fonts/roboto/Roboto-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: Roboto;
+    font-style: italic;
+    src: url('../fonts/roboto/Roboto-Italic.woff2') format('woff2'),
+    url('../fonts/roboto/Roboto-Italic.woff') format('woff');
+}
+@font-face {
+    font-family: Roboto;
+    font-weight: bold;
+    font-style: italic;
+    src: url('../fonts/roboto/Roboto-BoldItalic.woff2') format('woff2'),
+    url('../fonts/roboto/Roboto-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: Raleway;
+    font-weight: 100 900;
+    src: url('../fonts/raleway/Raleway-VF.woff2') format('woff2'),
+    url('../fonts/raleway/Raleway-VF.woff') format('woff');
+}
+@font-face {
+    font-family: Raleway;
+    font-weight: 100 900;
+    font-style: italic;
+    src: url('../fonts/raleway/Raleway-Italic-VF.woff2') format('woff2'),
+    url('../fonts/raleway/Raleway-Italic-VF.woff') format('woff');
+}
+
+:root {
+    --body-font: Roboto, sans-serif;
+    --display-font: Raleway, Roboto, sans-serif;
+}
+
+html, body {
+    font-family: var(--body-font);
+    font-size: @defaultSize;
+    font-synthesis: none;
+    accent-color: @light-accent;
+}
+
+@media (max-width: @width-verysmall) {
+    body {
+        font-size: @defaultSizeSmall;
+    }
+}
+
+body {
+    background: @f-bg1;
+    background: @bg1;
+    color: @f-fg;
+    color: @fg;
+    margin: 0;
+}
+
+h1 {
+    font-size: @sizeH1Big;
+    font-weight: 800;
+    color: @f-accent;
+    color: @accent;
+}
+
+h2 {
+    font-size: @sizeH2;
+    font-weight: 700;
+}
+
+@media (max-width: @width-small) {
+    h1 {
+        font-size: @sizeH1;
+    }
+}
+
+@media (max-width: @width-verysmall) {
+    h1 {
+        font-size: @sizeH1 * 0.8;
+    }
+    h2 {
+        font-size: @sizeH2 * 0.8;
+    }
+}
+
+::-moz-selection {
+    background: @f-accent-50;
+    background: @accent-50;
+}
+::selection {
+    background: @f-accent-50;
+    background: @accent-50;
+}
+
+a {
+    color: @f-accent;
+    color: @accent;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+input[type=url],
+input[type=date],
+input[type=time],
+input[type=datetime-local],
+textarea,
+.link-button,
+button,
+input[type=button] {
+    .button-base();
+    .button-focus();
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+input[type=url],
+input[type=date],
+input[type=time],
+input[type=datetime-local],
+textarea {
+    background: linear-gradient(to bottom, @input1, @input);
+    border-color: #0007;
+    padding: 0.4em 0.6em;
+    caret-color: currentColor;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &::placeholder {
+        color: inherit;
+        opacity: 0.6;
+    }
+}
+
+.link-button, button, input[type=button] {
+    background: @f-button;
+    background: @button;
+    color: @button-fg;
+    border-color: #0002;
+
+    &:active {
+        background: @f-button1;
+        background: @button1;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &.is-primary {
+        background: @f-accent;
+        background: @accent;
+        color: @f-accent-fg;
+        color: @accent-fg;
+        font-weight: bold;
+
+        &:active {
+            background: @f-light-accent1;
+            background: @light-accent1;
+        }
+    }
+}
+
+input[type=checkbox], input[type=radio] {
+    font-size: inherit;
+    min-width: 1em;
+    min-height: 1em;
+}
+
+select {
+    font: inherit;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid @light-separator;
+    text-align: left;
+
+    th {
+        background: @light-separator;
+    }
+
+    td, th {
+        padding: 0.2em 0.4em;
+    }
+
+    td {
+        border-right: 1px solid @light-separator;
+    }
+
+    tr:nth-child(2n+1) td {
+        background: @bg;
+    }
+    tr:nth-child(2n) td {
+        background: @bg1;
+    }
+}

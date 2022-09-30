@@ -1,0 +1,13 @@
+@font-face {
+    font-family: ns-kr;
+    src: url('NotoSansCJKkr-Regular.woff2') format('woff2'), url('NotoSansCJKkr-Regular.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ns-kr;
+    src: url('NotoSansCJKkr-Bold.woff2') format('woff2'), url('NotoSansCJKkr-Bold.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+}

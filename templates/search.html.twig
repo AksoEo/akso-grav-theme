@@ -1,0 +1,11 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    {{ page.content|raw }}
+
+    {% include 'partials/tntsearch-x.html.twig' with {
+        in_page: true,
+        placeholder: "THEME_TEJO.TNTSEARCH.PLACEHOLDER"|t,
+        submit: "THEME_TEJO.TNTSEARCH.SUBMIT"|t
+    } %}
+{% endblock %}

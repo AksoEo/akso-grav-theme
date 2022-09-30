@@ -1,0 +1,22 @@
+{% extends 'partials/tntsearch.html.twig' %}
+
+{% block tntsearch_input %}
+<h2 class="search-page-title">
+    <label class="search-input-label" for="tntsearch-search-input">{{page.title}}</label>
+</h2>
+<div class="search-input-container" class="form-group{{ dropdown ? ' tntsearch-dropdown' : '' }}" role="search">
+    <input
+        type="text"
+        name="q"
+        id="tntsearch-search-input"
+        class="search-field tntsearch-field{{ in_page ? ' tntsearch-field-inpage' : '' }}"
+        data-tntsearch="{{ options|json_encode|e('html_attr') }}"
+        placeholder="{{ placeholder }}"
+        value="{{ not dropdown ? query|e : '' }}"
+        autocomplete="off"
+        autofocus>
+    <button type="submit" class="search-submit" aria-label="{{submit}}">
+        <img role="presentation" aria-hidden="true" src="/user/themes/uea/images/search.svg" />
+    </button>
+</div>
+{% endblock %}

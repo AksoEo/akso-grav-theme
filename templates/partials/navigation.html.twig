@@ -1,0 +1,153 @@
+<input type="checkbox" id="nav-collapse" />
+
+<label class="compact-nav-header" for="nav-collapse">
+    {% set active_page_name = '' %}
+    {% for page in pages.children.visible %}
+        {% if (page.active or page.activeChild) %}
+            {% set active_page_name = page.menu %}
+        {% endif %}
+    {% endfor %}
+    {% if page_name_override is defined %}
+        {% set active_page_name = page_name_override %}
+    {% endif %}
+    {% if active_page_name == '' %}
+        {% set active_page_name = page.title %}
+    {% endif %}
+    <div class="active-page-indicator">
+        {{ active_page_name|e }}
+    </div>
+    <span class="nav-collapse-indicator">
+        <span class="nci-line-a"></span>
+        <span class="nci-line-b"></span>
+        <span class="nci-line-c"></span>
+    </span>
+</label>
+
+{% macro render_nav_page(page, nav_dropdown) %}
+    {% set page_class = '' %}
+    {% if page.active or page.activeChild %}
+        {% set page_class = 'selected' %}
+        {% if page.activeChild %}
+            {% set page_class = page_class ~ ' is-child-selection' %}
+        {% endif %}
+    {% endif %}
+    {% if nav_dropdown and page.children.visible.count > 0 %}
+        <li class="{{ page_class }} has-subpages">
+            {% set checkbox_id = "main-nav-dropdown-#{page.url}" %}
+            <input type="checkbox" id="{{ checkbox_id }}" class="subpage-expand-state" />
+            <a href="{{ page.url|e('html_attr') }}" aria-label="{{'THEME_TEJO.NAVIGATION.PAGE_ARIA_TITLE_WITH_SUBPAGES'|t(page.menu)}}">
+                <span class="page-title">{{ page.menu|e }}</span>
+                <label
+                    for="{{ checkbox_id }}"
+                    class="subpage-expand"
+                    aria-role="checkbox"
+                    aria-label="{{ 'THEME_TEJO.NAVIGATION.NAV_SUBPAGES_TOGGLE'|t(page.menu) }}">
+                </label>
+            </a>
+            <ul class="subpages" role="list" aria-label="{{ 'THEME_TEJO.NAVIGATION.NAV_SUBPAGES'|t(page.menu) }}">
+                {% for subpage in page.children.visible %}
+                    {% set page_class = '' %}
+                    {% if subpage.active %}
+                        {% set page_class = 'selected' %}
+                    {% endif %}
+                    <li class="{{ page_class }}">
+                        <a href="{{ subpage.url|e('html_attr') }}">
+                            {{ subpage.menu|e }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% else %}
+        <li class="{{ page_class }}">
+            <a href="{{ page.url|e('html_attr') }}">
+                {{ page.menu|e }}
+            </a>
+        </li>
+    {% endif %}
+{% endmacro %}
+
+<ul class="nav-pages">
+    {% set has_current_page = false %}
+    {% for page in pages.children.visible %}
+        {% if page.active or page.activeChild %}
+            {% set has_current_page = true %}
+        {% endif %}
+        {{ _self.render_nav_page(page, theme_config.nav_dropdown) }}
+    {% endfor %}
+    {% if not has_current_page and page.visible %}
+        <li class="virtual-item selected">
+            <a href="{{ page.url|e('html_attr') }}">
+                {{ page.menu|e }}
+            </a>
+        </li>
+    {% endif %}
+    {% for mitem in site.menu %}
+        <li>
+            <a href="{{ mitem.url|e('html_attr') }}">
+                {% if mitem.icon %}<i class="fa fa-{{ mitem.icon|e('html_attr') }}"></i>{% endif %}
+                {{ mitem.text|e }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% set active_top_level_page = null %}
+{% for p in pages.children.visible %}
+    {% if p.active or p.activeChild %}
+        {% set active_top_level_page = p %}
+    {% endif %}
+{% endfor %}
+{% if active_top_level_page != null and active_top_level_page.children.visible.count > 0 %}
+    <div id="nav-sidebar" role="navigation" aria-label="{{ "THEME_TEJO.NAVIGATION.NAV_SIDEBAR_TITLE"|t }}">
+        <div class="inner-nav-sidebar" role="list">
+        {#
+            this macro renders a single level of sidebar pages and recursively calls itself to
+            render the levels below.
+        #}
+        {% macro sidebar_pages(px, sc_id_prefix) %}
+            {% set sc_id_ctr = 0 %}
+            {% for p in px.children.visible %}
+                {% set li_class = (p.active) ? 'selected' : '' %}
+                {% set item_has_children = p.children.visible.count > 0 %}
+                {% set item_should_be_expanded_at_init = p.active or p.activeChild %}
+                    {% if item_has_children %}
+                        {% set checkbox_id = "sidebar-collapse-#{sc_id_prefix}#{sc_id_ctr}" %}
+                        {% set sc_id_ctr = sc_id_ctr + 1 %}
+                        <li class="{{ li_class }}" role="listitem">
+                            <input
+                                class="subpage-state-checkbox"
+                                type="checkbox"
+                                aria-label="{{"THEME_TEJO.NAVIGATION.SIDEBAR_COLLAPSE_LABEL"|t(p.menu)}}"
+                                id="{{ checkbox_id }}"
+                                {{ item_should_be_expanded_at_init ? 'checked' : '' }} />
+                            <div class="subpage-inner is-split" href="{{ p.url }}">
+                                <a class="subpage-inner-link" href="{{ p.url|e('html_attr') }}">
+                                    {{ p.menu|e }}
+                                </a>
+                                <label
+                                    for="{{ checkbox_id }}"
+                                    class="subpage-collapse-indicator"
+                                    role="presentation"
+                                    aria-hidden="true">
+                                    <span class="sci-line-a"></span>
+                                    <span class="sci-line-b"></span>
+                                </label>
+                            </div>
+                            <ul class="subpage-list" role="list">
+                                {{ _self.sidebar_pages(p, "#{sc_id_prefix}#{sc_id_ctr}") }}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="{{ li_class }}">
+                            <a class="subpage-inner" href="{{ p.url|e('html_attr') }}" role="listitem">
+                                {{ p.menu|e }}
+                            </a>
+                        </li>
+                    {% endif %}
+            {% endfor %}
+        {% endmacro %}
+        {{ _self.sidebar_pages(active_top_level_page, '') }}
+        </div>
+    </div>
+{% endif %}

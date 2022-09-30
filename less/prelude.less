@@ -1,0 +1,258 @@
+// fallbacks
+@f-bg: #fff;
+@f-bg-0: fade(@f-bg, 0%);
+@f-bg1: #f3f3f3;
+@f-bg2: #e9e9e9;
+@f-bg2-0: fade(#e9e9e9, 0%);
+@f-light-accent: #f18c07;
+@f-light-accent1: #f18c07;
+@f-light-accent-50: fade(#f18c07, 50%);
+@f-light-accent-0: fade(#f18c07, 0%);
+@f-accent: #e35e1e;
+@f-accent1: #e35e1e;
+@f-accent-50: fade(#e35e1e, 50%);
+@f-accent-0: fade(#e35e1e, 0%);
+@f-accent-fg: #fff;
+@f-second-accent: #2aa851;
+@f-second-accent-50: fade(#2aa851, 50%);
+@f-second-accent-0: fade(#2aa851, 0%);
+@f-fg: #333;
+@f-fg-50: fade(#333, 50%);
+@f-light-accent-fg: #333;
+
+@f-input: #fff;
+@f-input1: #fff;
+
+@f-button: #fff;
+@f-button1: #ddd;
+@f-button-fg: #333;
+
+@f-radius: 2px;
+@f-border-width: 2px;
+@f-warning: #e89940;
+@f-warning-bg: #f7d9b8;
+@f-warning-fg: @f-fg;
+@f-error: #e84c40;
+@f-error-bg: #f7adb8;
+@f-error-fg: @f-fg;
+@f-page-separator: @f-light-accent;
+@f-light-separator: #bbb;
+@f-lighter-separator: #ddd;
+@f-dialog-backdrop: fade(#fff, 20%);
+
+@f-ad: #22b665;
+@f-search: #fac500;
+@f-search-fg: #4e3721;
+
+@f-sidebar-width: 32ch;
+@f-content-width: 64ch;
+@f-page-width: @f-sidebar-width + @f-content-width + 2em;
+
+:root {
+    --bg: @f-bg;
+    --bg-0: @f-bg-0;
+    --bg1: @f-bg1;
+    --bg2: @f-bg2;
+    --bg2-0: @f-bg2-0;
+    --input: @f-input;
+    --input1: @f-input1;
+    --button: @f-button;
+    --button1: @f-button1;
+    --button-fg: @f-button-fg;
+    --light-accent: @f-light-accent;
+    --light-accent1: @f-light-accent1;
+    --light-accent-50: @f-light-accent-50;
+    --light-accent-0: @f-light-accent-0;
+    --light-accent-glow: fade(@f-light-accent, 90%);
+    --accent: @f-accent;
+    --accent1: @f-accent1;
+    --accent-50: @f-accent-50;
+    --accent-0: @f-accent-0;
+    --accent-fg: @f-accent-fg;
+    --second-accent: @f-second-accent;
+    --second-accent-50: @f-second-accent-50;
+    --second-accent-0: @f-second-accent-0;
+    --fg: @f-fg;
+    --fg-50: @f-fg-50;
+    --light-accent-fg: @f-light-accent-fg;
+    --radius: @f-radius;
+    --border-width: @f-border-width;
+    --warning: @f-warning;
+    --warning-bg: @f-warning-bg;
+    --warning-fg: var(--fg);
+    --error: @f-error;
+    --error-bg: @f-error-bg;
+    --error-fg: var(--fg);
+    --page-separator: @f-page-separator;
+    --light-separator: @f-light-separator;
+    --lighter-separator: @f-lighter-separator;
+    --dialog-backdrop: @f-dialog-backdrop;
+
+    --ad: @f-ad;
+    --search: @f-search;
+    --search-fg: @f-search-fg;
+
+    --sidebar-width: @f-sidebar-width;
+    --content-width: @f-content-width;
+
+    --list-back-picture-opacity: 0.7;
+
+    &.allows-dark {
+        @media (prefers-color-scheme: dark) {
+            color-scheme: dark;
+
+            --bg: #2f2f2f;
+            --bg-0: fade(#222, 0%);
+            --bg1: #1f1f1f;
+            --bg2: #101010;
+            --bg2-0: fade(#101010, 0%);
+            --button: #3f3f3f;
+            --button1: #2f2f2f;
+            --button-fg: #eee;
+            --input: #333;
+            --input1: #333;
+            --fg: #ddd;
+            --light-accent-fg: #fff;
+            --light-accent: mix(darken(@f-light-accent, 20%), @f-accent, 20%);
+            --light-accent1: mix(darken(@f-light-accent1, 30%), @f-accent, 30%);
+            --light-accent-glow: fade(@f-light-accent, 40%);
+            --error-bg: #7a2431;
+            --page-separator: var(--light-separator);
+            --light-separator: #444;
+            --lighter-separator: #333;
+            --dialog-backdrop: fade(#000, 30%);
+
+            --list-back-picture-opacity: 0.3;
+        }
+    }
+}
+
+// variables
+@bg: var(--bg);
+@bg-0: var(--bg-0);
+@bg1: var(--bg1);
+@bg2: var(--bg2);
+@bg2-0: var(--bg2-0);
+@input: var(--input);
+@input1: var(--input1);
+@button: var(--button);
+@button1: var(--button1);
+@button-fg: var(--button-fg);
+@light-accent: var(--light-accent);
+@light-accent1: var(--light-accent1);
+@light-accent-50: var(--light-accent-50);
+@light-accent-0: var(--light-accent-0);
+@light-accent-grad: linear-gradient(to bottom, @light-accent, @light-accent1);
+@light-accent-glow: var(--light-accent-glow);
+@accent: var(--accent);
+@accent1: var(--accent1);
+@accent-50: var(--accent-50);
+@accent-0: var(--accent-0);
+@accent-grad: linear-gradient(to bottom, @accent, @accent1);
+@accent-fg: var(--accent-fg);
+@second-accent: var(--second-accent);
+@fg: var(--fg);
+@fg-50: var(--fg-50);
+@light-accent-fg: var(--light-accent-fg);
+@page-separator: var(--page-separator);
+@light-separator: var(--light-separator);
+@lighter-separator: var(--lighter-separator);
+
+@ad: var(--ad);
+@search: var(--search);
+@search-fg: var(--search-fg);
+
+// border radius for buttons, etc.
+@radius: var(--radius);
+// widths of various border decorations
+@border-width: var(--border-width);
+
+// layout widths
+@content-width: var(--content-width);
+@sidebar-width: var(--sidebar-width);
+@page-width: calc(@content-width + @sidebar-width + 2em);
+
+////////// ---
+
+// purely for font size math
+@_defaultSizeV: 18;
+@_defaultSize: @_defaultSizeV * 1rem;
+
+@defaultSize: @_defaultSizeV * 1px;
+@defaultSizeSmall: 14px;
+
+@sizeH1Big: 34 / @_defaultSize;
+@sizeH1: 32 / @_defaultSize;
+@sizeH2: 24 / @_defaultSize;
+@sizeText: 18 / @_defaultSize;
+
+.font-size (@s) {
+    font-size: @s / @_defaultSize;
+}
+
+// for media queries
+@width-small: 600px;
+@width-splitpage: 800px; // ALSO UPDATE global.js when changing this
+@width-verysmall: 320px;
+
+// top highlight
+@shade-top: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+@strong-shade-top: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+// bottom shading
+@shade-bottom: inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+@strong-shade-bottom: inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+// top & bottom
+@shade-both: @shade-top, @shade-bottom;
+@strong-shade-both: @strong-shade-top, @strong-shade-bottom;
+
+@focus-ring-anim-init: 0 0 0 20px @light-accent-0;
+@focus-ring: 0 0 0 4px @light-accent-50;
+
+@subtle-shadow-below: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+@easing: cubic-bezier(.2, .3, 0, 1);
+
+.button-base() {
+    display: inline-block;
+    border-radius: @radius;
+    border: 1px solid transparent;
+    font: inherit;
+    color: inherit;
+    line-height: 1.3;
+    padding: 0.2em 1em;
+    margin: 0 0.2em;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes input-focusable-focus-ring-in {
+    0% {
+        box-shadow: @focus-ring-anim-init;
+    }
+}
+
+.button-focus-focused() {
+    outline: none;
+    box-shadow: @focus-ring;
+    animation: input-focusable-focus-ring-in 0.4s @easing;
+}
+
+.button-focus() {
+    &:focus {
+        .button-focus-focused();
+    }
+}
+
+.log-gradient-background(@direction: to bottom, @color: black, @least: 0%, @most: 100%) {
+    background-image: linear-gradient(@direction,
+        fade(@color, (@most - @least) * 0.00 + @least) 0%,
+        fade(@color, (@most - @least) * 0.01 + @least) 13%,
+        fade(@color, (@most - @least) * 0.05 + @least) 25%,
+        fade(@color, (@most - @least) * 0.12 + @least) 38%,
+        fade(@color, (@most - @least) * 0.22 + @least) 50%,
+        fade(@color, (@most - @least) * 0.36 + @least) 63%,
+        fade(@color, (@most - @least) * 0.53 + @least) 75%,
+        fade(@color, (@most - @least) * 0.75 + @least) 88%,
+        fade(@color, (@most - @least) * 1.00 + @least) 100%);
+}

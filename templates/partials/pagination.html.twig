@@ -1,0 +1,50 @@
+{% set pagination = pagination|default(collection.params.pagination) %}
+{% set base_url = base_url|default(page.url) %}
+{% if pagination|length > 1 %}
+    <div class="pagination" aria-label="{{ "THEME_TEJO.PAGINATION.TITLE"|t }}">
+    {% if pagination.hasPrev %}
+        {% set url = (base_url ~ pagination.params ~ pagination.prevUrl)|replace({'//':'/'}) %}
+        <a class="pagination-direction dir-prev link-button" href="{{url}}" aria-label="{{ "THEME_TEJO.PAGINATION.PREV_PAGE"|t }}">
+            &laquo;
+        </a>
+    {% else %}
+        <button disabled class="pagination-direction dir-prev" aria-label="{{ "THEME_TEJO.PAGINATION.PREV_PAGE_NONE"|t }}">
+            &laquo;
+        </button>
+    {% endif %}
+
+    <ul class="pagination-items">
+    {% spaceless %}
+    {% for p in pagination %}
+        {% if p.isCurrent %}
+        <li class="pagination-item is-current-item" aria-label="{{ "THEME_TEJO.PAGINATION.ON_PAGE"|t(p.number) }}">
+            <span class="page-label">{{p.number}}</span>
+        </li>
+        {% elseif p.isInDelta %}
+        <li class="pagination-item is-interactive">
+            {% set url = (base_url ~ pagination.params ~ p.url)|replace({'//':'/'}) %}
+            <a href="{{url}}" class="page-label is-link" aria-label="{{ "THEME_TEJO.PAGINATION.GOTO_PAGE"|t(p.number) }}">
+                {{p.number}}
+            </a>
+        </li>
+        {% elseif p.isDeltaBorder %}
+        <li class="pagination-item is-gap" aria-hidden="true">
+            <span class="gap-label">&hellip;</span>
+        </li>
+        {% endif %}
+    {% endfor %}
+    {% endspaceless %}
+    </ul>
+
+    {% if pagination.hasNext %}
+        {% set url = (base_url ~ pagination.params ~ pagination.nextUrl)|replace({'//':'/'}) %}
+        <a class="pagination-direction dir-next link-button" href="{{url}}" aria-label="{{ "THEME_TEJO.PAGINATION.NEXT_PAGE"|t }}">
+            &raquo;
+        </a>
+    {% else %}
+        <button disabled class="pagination-direction dir-next" aria-label="{{ "THEME_TEJO.PAGINATION.NEXT_PAGE_NONE"|t }}">
+            &raquo;
+        </button>
+    {% endif %}
+</div>
+{% endif %}

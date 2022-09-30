@@ -1,0 +1,38 @@
+eo:
+  THEME_TEJO:
+    NAVIGATION:
+      HEADER: 'Kapa teksto'
+      FOOTER: 'Pieda teksto'
+      PAGE_ARIA_TITLE_WITH_SUBPAGES: '%s, havas subpaĝojn'
+      NAV_SUBPAGES: 'Subpaĝoj de %s'
+      NAV_SUBPAGES_TOGGLE: 'Eniri subpaĝojn de %s'
+      NAV_SIDEBAR_TITLE: 'Trairi paĝojn de tiu ĉi sekcio'
+      SIDEBAR_COLLAPSE_LABEL: 'Montri subpaĝojn: %s'
+    PAGINATION:
+      TITLE: 'Trairi paĝojn'
+      PREV_PAGE: 'Antaŭa paĝo'
+      NEXT_PAGE: 'Venonta paĝo'
+      PREV_PAGE_NONE: 'Tiu ĉi estas la unua paĝo'
+      NEXT_PAGE_NONE: 'Tiu ĉi estas la lasta paĝo'
+      GOTO_PAGE: 'Iri al paĝo %s'
+      ON_PAGE: 'Nuna paĝo: %s'
+    BLOG:
+      ITEM:
+        CONTINUE_READING: 'Legi pli »'
+        PREV_POST: 'Antaŭa komuniko'
+        NEXT_POST: 'Venonta komuniko'
+    TNTSEARCH:
+      FOUND_RESULT: "Trovis 1 rezulton"
+      FOUND_RESULTS: "Trovis %s rezultojn"
+      FOUND_IN_TIME: " en %s"
+      PLACEHOLDER: "Serĉi..."
+      SUBMIT: "Serĉi"
+      RESULTS_TITLE: "Rezultoj"
+    content:
+      render_error: 'Okazis eraro dum ŝarĝado de tiu ĉi enhavo. Bonvolu reprovi poste.'
+      breadcrumbs_title: 'Via loko en la retejo'
+      img_carousel_page_label: 'Bildo %s el %s'
+      img_carousel_pagination: 'Elekti bildon'
+      news_read_more: 'Legi pli »'
+      news_sidebar_more_news: 'Ĉiuj komunikoj »'
+      info_box_ad_label: 'Anonceto'

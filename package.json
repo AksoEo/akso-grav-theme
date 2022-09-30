@@ -1,0 +1,16 @@
+{
+  "name": "grav-theme-tejo",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Tutmonda Esperantista Junulara Organizo",
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-less": "^4.0.1",
+    "gulp-plumber": "^1.2.1",
+    "less": "^3.10.3"
+  }
+}

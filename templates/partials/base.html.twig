@@ -1,0 +1,104 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#f3f3f3" />
+    {% include 'partials/metadata.html.twig' %}
+
+    <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+{% endblock head %}
+
+{% block stylesheets %}
+    {% do assets.addCss('theme://css-compiled/index.css', 100) %}
+{% endblock %}
+
+{% block javascripts %}
+    {% do assets.addJs('theme://js/global.js', { loading: 'defer' }) %}
+    {% do assets.addJs('theme://js/carousel.js', { loading: 'defer' }) %}
+    {% do assets.addJs('theme://js/countdown.js', { loading: 'defer' }) %}
+{% endblock %}
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+    <!-- Some parts of this website use Twemoji by Twitter [https://github.com/twitter/twemoji] licensed under CC-BY 4.0 -->
+</head>
+<body id="top" class="{{ page.header.body_classes }}">
+
+    <div id="top-login-bar">
+        {% include 'partials/akso_loginbar.html.twig' %}
+    </div>
+
+{% block header %}
+    <header id="top-header" aria-label="{{ "THEME_TEJO.NAVIGATION.HEADER"|t }}">
+        <div class="title-container">
+            <a class="header-title" href="{{ home_url }}">
+                <img
+                    class="logo-image"
+                    height="76"
+                    src="{{ url('theme://images/logo.svg') }}"
+                    alt="{{ grav.theme.config.logoAlt|e('html_attr') }}" />
+                <div class="header-subtitle">
+                    {{ grav.theme.config.logoSubtitle|e }}
+                </div>
+            </a>
+            <div class="title-actions">
+            {% if theme_config.search_path is not empty %}
+                <form class="header-search inline-search-form" action="{{ theme_config.search_path }}">
+                    <input id="header-search-query" type="text" name="q" class="search-query" placeholder="{{ theme_config.search_label }}" /><!--
+                    --><button type="submit" class="search-submit">
+                        <img
+                            class="search-icon"
+                            role="presentation"
+                            aria-label="{{ theme_config.search_label }}"
+                            src="/user/themes/uea/images/search.svg" />
+                    </button>
+                    <label for="header-search-query" class="search-label">{{ theme_config.search_label }}</label>
+                </form>
+            {% endif %}
+            {% if theme_config.support_link is not empty and not uea_hide_support_button %}
+                <div class="header-support">
+                    <a
+                        href="{{ theme_config.support_link|e('html_attr') }}"
+                        class="support-button link-button is-primary">
+                        {{ theme_config.support_label }}
+                        <span class="action-button-shine" />
+                    </a>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+        {% block header_navigation %}
+        <nav class="main-nav">
+            {% include 'partials/navigation.html.twig' %}
+        </nav>
+        {% endblock %}
+    </header>
+{% endblock %}
+
+{% block body %}
+    <main id="main-content">
+        <div class="breadcrumbs-container">
+            {% include 'partials/breadcrumbs.html.twig' %}
+        </div>
+        {% block content %}{% endblock %}
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block bottom %}
+    {{ assets.js('bottom')|raw }}
+{% endblock %}
+
+</body>
+</html>

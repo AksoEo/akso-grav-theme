@@ -1,0 +1,13 @@
+@font-face {
+    font-family: ns-tc;
+    src: url('NotoSansCJKtc-Regular.woff2') format('woff2'), url('NotoSansCJKtc-Regular.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ns-tc;
+    src: url('NotoSansCJKtc-Bold.woff2') format('woff2'), url('NotoSansCJKtc-Bold.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+}

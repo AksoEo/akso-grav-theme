@@ -1,0 +1,127 @@
+@import './prelude';
+
+.inline-search-form {
+    text-align: right;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    margin: 1.142em 0;
+    font-size: 0.875em;
+
+    .search-query {
+        vertical-align: middle;
+        margin-right: calc(@radius * -1);
+
+        @media (max-width: @width-verysmall) {
+            width: 0;
+            flex: 1;
+        }
+    }
+    .search-submit {
+        vertical-align: middle;
+        margin: 0;
+
+        img {
+            vertical-align: middle;
+            height: 1.35em;
+        }
+    }
+    .search-query + .search-submit {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 1px solid @light-separator;
+    }
+}
+
+.tntsearch-form {
+    h2.search-page-title {
+        text-align: center;
+    }
+
+    .search-input-container {
+        margin-top: 1em;
+        display: flex;
+        align-items: stretch;
+
+        .search-input-label {
+            display: none;
+        }
+
+        .search-field {
+            flex: 1;
+            margin-left: 0;
+        }
+
+        .search-submit {
+            flex-shrink: 0;
+            margin-right: 0;
+
+            img {
+                vertical-align: middle;
+            }
+        }
+
+        @media (max-width: 300px) {
+            display: block;
+
+            .search-field {
+                width: 100%;
+                margin-right: 0;
+            }
+            .search-submit {
+                margin-top: 0.2em;
+                float: right;
+            }
+        }
+    }
+
+    .search-results {
+        clear: both;
+
+        .results-meta {
+            font-size: 0.875em;
+            opacity: 0.5;
+            margin-top: 0.5em;
+            text-align: left;
+        }
+        .results-list {
+            padding: 0;
+            list-style-type: none;
+
+            .search-result {
+                background: @f-bg;
+                background: @bg;
+                border-radius: @radius;
+                box-shadow: @shade-both;
+                padding: 1em;
+                margin: 1em 0;
+
+                .result-title {
+                    margin: 0;
+                }
+                .result-contents {
+                    margin-top: 0.5em;
+                    margin-bottom: 0;
+                    word-wrap: break-word;
+
+                    @media (max-width: @width-verysmall) {
+                        font-size: 0.875em;
+                        text-align: left;
+                    }
+                }
+
+                em {
+                    font-style: inherit;
+                    font-weight: bold;
+                    background: @f-search;
+                    background: @search;
+                    color: @f-search-fg;
+                    color: @search-fg;
+                    border-radius: @radius;
+                    padding: 0 0.1em;
+                    text-decoration: inherit;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+@font-face {
+    font-family: ns-jp;
+    src: url('NotoSansCJKjp-Regular.woff2') format('woff2'), url('NotoSansCJKjp-Regular.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ns-jp;
+    src: url('NotoSansCJKjp-Bold.woff2') format('woff2'), url('NotoSansCJKjp-Bold.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+}
