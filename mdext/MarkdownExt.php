@@ -35,7 +35,7 @@ class MarkdownExt {
         if (count($breadcrumbs) > 0) {
             // fix html a bit
             $breadcrumbs[0]->setAttribute('role', 'navigation');
-            $breadcrumbs[0]->setAttribute('aria-label', $language->translate('THEME_TEJO.content.breadcrumbs_title'));
+            $breadcrumbs[0]->setAttribute('aria-label', $language->translate('THEME_AKSO.content.breadcrumbs_title'));
             $document->first('.breadcrumbs-container [itemtype="http://schema.org/BreadcrumbList"]')->setAttribute('role', 'list');
             $itemCount = 0;
             foreach ($document->find('.breadcrumbs-container [itemtype="http://schema.org/Thing"]') as $li) {

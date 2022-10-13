@@ -214,9 +214,7 @@
                         flex: 1;
                         color: inherit;
                         text-decoration: none;
-                        padding-left: 1em;
-                        padding-top: 0.4em;
-                        padding-bottom: 0.4em;
+                        padding: 0.4em 0.3em 0.4em 1em;
                         border-radius: @radius;
 
                         &::after {
@@ -443,7 +441,7 @@
                     height: @f-border-width;
                     height: @border-width;
                     background: @f-light-accent;
-                    background: @light-accent;
+                    background: rgb(var(--section-marker-line));
                     flex-shrink: 0;
                 }
                 .section-marker-inner {
@@ -456,7 +454,7 @@
                     height: @f-border-width;
                     height: @border-width;
                     background: @f-light-accent;
-                    background: linear-gradient(to right, @light-accent, @light-accent-0);
+                    background: linear-gradient(to right, rgb(var(--section-marker-line)), ~"rgb(var(--section-marker-line)/var(--section-marker-line-fadeout))");
                 }
             }
         }
@@ -477,9 +475,10 @@
             background: @f-bg;
             background: @bg;
             border-radius: @radius;
-            border: 1px solid #0003;
-            border-left: 0.3em solid @f-second-accent;
-            border-left: 0.3em solid @second-accent;
+            border: var(--info-box-border);
+            border-left: var(--info-box-border-width) solid @f-second-accent;
+            border-left-color: @second-accent;
+            box-shadow: var(--info-box-shadow);
             --section-marker-bg: @bg;
 
             &:first-child,
@@ -1097,8 +1096,8 @@
                     .item-role {
                         display: inline-block;
                         border-radius: var(--radius);
-                        border: 1px solid @light-separator;
-                        border-color: var(--light-separator);
+                        border: 1px solid @f-light-separator;
+                        border-color: rgb(var(--light-separator));
                         font-size: smaller;
                         padding: 0 0.2em;
 
@@ -1121,16 +1120,16 @@
                         display: inline-block;
                         width: 1em;
                         height: 1em;
-                        background-image: url(/user/themes/tejo/images/website.svg);
+                        background-image: url(/user/themes/akso/images/website.svg);
                         vertical-align: -0.2em;
                         margin-right: 0.2em;
                     }
                 }
                 .item-email::before {
-                    background-image: url(/user/themes/tejo/images/email.svg);
+                    background-image: url(/user/themes/akso/images/email.svg);
                 }
                 .item-address::before {
-                    background-image: url(/user/themes/tejo/images/mail.svg);
+                    background-image: url(/user/themes/akso/images/mail.svg);
                 }
                 .item-address .address-line:first-child {
                     display: inline;

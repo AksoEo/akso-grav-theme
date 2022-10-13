@@ -1,4 +1,4 @@
-<section class="search-results" aria-label="{{ "THEME_TEJO.TNTSEARCH.RESULTS_TITLE"|t }}">
+<section class="search-results" aria-label="{{ "THEME_AKSO.TNTSEARCH.RESULTS_TITLE"|t }}">
     {# filter results based on where the search page is located #}
     {# TODO: proper filtering? #}
     {% set search_loc = page.route|split('/')|slice(0, -1)|join('/') %}
@@ -18,14 +18,14 @@
         {% if config.get('plugins.tntsearch.display_hits') %}
         <span class="hits">
             {% if result_count == 1 %}
-            {{ "THEME_TEJO.TNTSEARCH.FOUND_RESULT"|t|raw }}
+            {{ "THEME_AKSO.TNTSEARCH.FOUND_RESULT"|t|raw }}
             {% else %}
-            {{ "THEME_TEJO.TNTSEARCH.FOUND_RESULTS"|t(result_count)|raw }}
+            {{ "THEME_AKSO.TNTSEARCH.FOUND_RESULTS"|t(result_count)|raw }}
             {% endif %}
         </span>
         {% endif %}
         {% if config.get('plugins.tntsearch.display_time') %}
-            <span class="time">{{ "THEME_TEJO.TNTSEARCH.FOUND_IN_TIME"|t(tntsearch_results.execution_time)|raw }}</span>
+            <span class="time">{{ "THEME_AKSO.TNTSEARCH.FOUND_IN_TIME"|t(tntsearch_results.execution_time)|raw }}</span>
         {% endif %}
     </p>
 

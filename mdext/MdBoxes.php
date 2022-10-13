@@ -31,7 +31,7 @@ class MdBoxes {
                 );
 
                 if ($tag === 'anonceto') {
-                    $attributes['data-ab-label'] = $language->translate('THEME_TEJO.content.info_box_ad_label');
+                    $attributes['data-ab-label'] = $language->translate('THEME_AKSO.content.info_box_ad_label');
                 }
 
                 return array(

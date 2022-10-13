@@ -1,6 +1,10 @@
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
 <!DOCTYPE html>
-<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
+{% set allow_dark = '' %}
+{% if grav.theme.config.allow_dark %}
+    {% set allow_dark = 'allows-dark' %}
+{% endif %}
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}" class="{{ allow_dark }}">
 <head>
 {% block head %}
     <meta charset="utf-8" />
@@ -16,6 +20,7 @@
 
 {% block stylesheets %}
     {% do assets.addCss('theme://css-compiled/index.css', 100) %}
+    {% do assets.addCss('theme://css/ext.css') %}
 {% endblock %}
 
 {% block javascripts %}
@@ -37,17 +42,38 @@
     </div>
 
 {% block header %}
-    <header id="top-header" aria-label="{{ "THEME_TEJO.NAVIGATION.HEADER"|t }}">
-        <div class="title-container">
+    <header id="top-header" aria-label="{{ "THEME_AKSO.NAVIGATION.HEADER"|t }}">
+        {% set container_class = 'has-no-title-text' %}
+        {% if grav.theme.config.titleShort %}
+            {% set container_class = 'has-title-text' %}
+        {% endif %}
+        <div class="title-container {{ container_class }}">
             <a class="header-title" href="{{ home_url }}">
                 <img
                     class="logo-image"
                     height="76"
-                    src="{{ url('theme://images/logo.svg') }}"
+                    src="{{ url('theme://images/logo.png') }}"
+                    srcset="{{ url('theme://images/logo.svg') }} 1x"
                     alt="{{ grav.theme.config.logoAlt|e('html_attr') }}" />
-                <div class="header-subtitle">
-                    {{ grav.theme.config.logoSubtitle|e }}
-                </div>
+                {% if grav.theme.config.titleShort %}
+                    <div class="header-inner">
+                        <div class="site-title">
+                            <span class="site-title-long">
+                                {{ config.site.title|e }}
+                            </span>
+                            <span class="site-title-short">
+                                {{ grav.theme.config.titleShort|e }}
+                            </span>
+                        </div>
+                        <div class="site-subtitle">
+                            {{ grav.theme.config.titleSubtitle|e }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="header-subtitle">
+                        {{ grav.theme.config.logoSubtitle|e }}
+                    </div>
+                {% endif %}
             </a>
             <div class="title-actions">
             {% if theme_config.search_path is not empty %}
@@ -58,7 +84,7 @@
                             class="search-icon"
                             role="presentation"
                             aria-label="{{ theme_config.search_label }}"
-                            src="/user/themes/uea/images/search.svg" />
+                            src="{{ url('theme://images/search.svg') }}" />
                     </button>
                     <label for="header-search-query" class="search-label">{{ theme_config.search_label }}</label>
                 </form>

@@ -54,7 +54,7 @@ class MdTable {
                 foreach ($row as $cell) {
                     $cells[] = array(
                         'name' => 'td',
-                        'handler' => 'text',
+                        'handler' => 'line',
                         'text' => $cell,
                     );
                 }

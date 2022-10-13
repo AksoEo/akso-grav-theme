@@ -49,51 +49,77 @@
 @f-page-width: @f-sidebar-width + @f-content-width + 2em;
 
 :root {
-    --bg: @f-bg;
-    --bg-0: @f-bg-0;
-    --bg1: @f-bg1;
-    --bg2: @f-bg2;
-    --bg2-0: @f-bg2-0;
-    --input: @f-input;
-    --input1: @f-input1;
-    --button: @f-button;
-    --button1: @f-button1;
-    --button-fg: @f-button-fg;
-    --light-accent: @f-light-accent;
-    --light-accent1: @f-light-accent1;
-    --light-accent-50: @f-light-accent-50;
-    --light-accent-0: @f-light-accent-0;
-    --light-accent-glow: fade(@f-light-accent, 90%);
-    --accent: @f-accent;
-    --accent1: @f-accent1;
-    --accent-50: @f-accent-50;
-    --accent-0: @f-accent-0;
-    --accent-fg: @f-accent-fg;
-    --second-accent: @f-second-accent;
-    --second-accent-50: @f-second-accent-50;
-    --second-accent-0: @f-second-accent-0;
-    --fg: @f-fg;
-    --fg-50: @f-fg-50;
-    --light-accent-fg: @f-light-accent-fg;
+    --bg: 255 255 255;
+    --bg1: 243 243 243;
+    --bg2: 233 233 233;
+    --fg: 51 51 51;
+
+    --input: 255 255 255;
+    --input-grad1: 243 243 243;
+    --button: 255 255 255;
+    --button-grad1: 243 243 243;
+    --button-highlight: 221 221 221;
+    --button-fg: 51 51 51;
+    --button-border: 0 0 0;
+    --button-border-opacity: 0.2;
+
+    --button-primary: var(--accent);
+    --button-primary-grad1: var(--accent-grad1);
+    --button-primary-highlight: var(--button-primary-grad1);
+    --button-primary-fg: var(--accent-fg);
+
+    --light-accent: 200 200 200;
+    --light-accent-grad1: 180 180 180;
+    --light-accent-fg: var(--fg);
+    --accent: 100 100 100;
+    --accent-grad1: 70 70 70;
+    --accent-fg: 255 255 255;
+    --second-accent: var(--accent);
+    --focus-accent: var(--accent);
+
+    --header-nav-tab: transparent;
+    --header-nav-tab-grad1: transparent;
+    --header-nav-tab-fg: var(--fg);
+    --header-nav-tab-hover-fg: var(--header-nav-tab-fg);
+    --header-nav-tab-font-variant: normal;
+    --header-nav-tab-selected: var(--light-accent);
+    --header-nav-tab-selected-grad1: var(--light-accent-grad1);
+    --header-nav-tab-selected-fg: var(--light-accent-fg);
+    --header-nav-subpages-shadow: 0 4px 8px fade(#000, 30%);
+    --header-nav-subpages-hover-fg: var(--fg);
+    --header-nav-subpages-hover-text-decoration: underline;
+    --header-nav-subpages-selected: var(--light-accent);
+    --header-nav-subpages-selected-fg: var(--light-accent-fg);
+
     --radius: @f-radius;
     --border-width: @f-border-width;
-    --warning: @f-warning;
-    --warning-bg: @f-warning-bg;
-    --warning-fg: var(--fg);
-    --error: @f-error;
-    --error-bg: @f-error-bg;
-    --error-fg: var(--fg);
-    --page-separator: @f-page-separator;
-    --light-separator: @f-light-separator;
-    --lighter-separator: @f-lighter-separator;
-    --dialog-backdrop: @f-dialog-backdrop;
 
-    --ad: @f-ad;
-    --search: @f-search;
-    --search-fg: @f-search-fg;
+    --warning: 232 153 64;
+    --warning-bg: 247 217 184;
+    --warning-fg: var(--fg);
+    --error: 232 76 64;
+    --error-bg: 247 173 184;
+    --error-fg: var(--fg);
+    --page-separator: var(--light-accent);
+    --light-separator: 187 187 187;
+    --lighter-separator: 221 221 221;
+    --dialog-backdrop: 255 255 255;
+    --dialog-backdrop-opacity: 0.2;
+
+    --section-marker-line: var(--accent);
+    --section-marker-line-fadeout: 1;
+
+    --ad: 34 182 101;
+    --search: 250 197 0;
+    --search-fg: 78 55 33;
 
     --sidebar-width: @f-sidebar-width;
     --content-width: @f-content-width;
+    --input-border-width: 0px;
+    --input-box-shadow: @shade-both;
+    --info-box-border: none;
+    --info-box-border-width: var(--border-width);
+    --info-box-shadow: @shade-both;
 
     --list-back-picture-opacity: 0.7;
 
@@ -101,26 +127,23 @@
         @media (prefers-color-scheme: dark) {
             color-scheme: dark;
 
-            --bg: #2f2f2f;
-            --bg-0: fade(#222, 0%);
-            --bg1: #1f1f1f;
-            --bg2: #101010;
-            --bg2-0: fade(#101010, 0%);
-            --button: #3f3f3f;
-            --button1: #2f2f2f;
-            --button-fg: #eee;
-            --input: #333;
-            --input1: #333;
-            --fg: #ddd;
-            --light-accent-fg: #fff;
-            --light-accent: mix(darken(@f-light-accent, 20%), @f-accent, 20%);
-            --light-accent1: mix(darken(@f-light-accent1, 30%), @f-accent, 30%);
-            --light-accent-glow: fade(@f-light-accent, 40%);
-            --error-bg: #7a2431;
+            --bg: 47 47 47;
+            --bg1: 31 31 31;
+            --bg2: 16 16 16;
+            --button: 63 63 63;
+            --button-grad1: 47 47 47;
+            --button-fg: 238 238 238;
+            --input: 21 21 21;
+            --input-grad1: 31 31 31;
+            --fg: 221 221 221;
+            --light-accent-fg: 255 255 255;
+            --light-accent: 170 170 170;
+            --light-accent-grad1: 150 150 150;
+            --error-bg: 122 36 49;
             --page-separator: var(--light-separator);
-            --light-separator: #444;
-            --lighter-separator: #333;
-            --dialog-backdrop: fade(#000, 30%);
+            --light-separator: 100 100 100;
+            --lighter-separator: 60 60 60;
+            --dialog-backdrop: 0 0 0;
 
             --list-back-picture-opacity: 0.3;
         }
@@ -128,39 +151,39 @@
 }
 
 // variables
-@bg: var(--bg);
-@bg-0: var(--bg-0);
-@bg1: var(--bg1);
-@bg2: var(--bg2);
-@bg2-0: var(--bg2-0);
-@input: var(--input);
-@input1: var(--input1);
-@button: var(--button);
-@button1: var(--button1);
-@button-fg: var(--button-fg);
-@light-accent: var(--light-accent);
-@light-accent1: var(--light-accent1);
-@light-accent-50: var(--light-accent-50);
-@light-accent-0: var(--light-accent-0);
+@bg: rgb(var(--bg));
+@bg-0: ~"rgb(var(--bg)/0)";
+@bg1: rgb(var(--bg1));
+@bg2: rgb(var(--bg2));
+@bg2-0: ~"rgb(var(--bg2)/0)";
+@input: rgb(var(--input));
+@input1: rgb(var(--input-grad1));
+@button: rgb(var(--button));
+@button1: rgb(var(--button-grad1));
+@button-fg: rgb(var(--button-fg));
+@light-accent: rgb(var(--light-accent));
+@light-accent1: rgb(var(--light-accent-grad1));
+@light-accent-50: ~"rgb(var(--light-accent)/0.5)";
+@light-accent-0: ~"rgb(var(--light-accent)/0)";
 @light-accent-grad: linear-gradient(to bottom, @light-accent, @light-accent1);
-@light-accent-glow: var(--light-accent-glow);
-@accent: var(--accent);
-@accent1: var(--accent1);
-@accent-50: var(--accent-50);
-@accent-0: var(--accent-0);
+@light-accent-glow: ~"rgb(var(--light-accent)/0.9)";
+@accent: rgb(var(--accent));
+@accent1: rgb(var(--accent-grad1));
+@accent-50: ~"rgb(var(--accent)/0.5)";
+@accent-0: ~"rgb(var(--accent)/0)";
 @accent-grad: linear-gradient(to bottom, @accent, @accent1);
-@accent-fg: var(--accent-fg);
-@second-accent: var(--second-accent);
-@fg: var(--fg);
-@fg-50: var(--fg-50);
-@light-accent-fg: var(--light-accent-fg);
-@page-separator: var(--page-separator);
-@light-separator: var(--light-separator);
-@lighter-separator: var(--lighter-separator);
+@accent-fg: rgb(var(--accent-fg));
+@second-accent: rgb(var(--second-accent));
+@fg: rgb(var(--fg));
+@fg-50: ~"rgb(var(--fg)/0.5)";
+@light-accent-fg: rgb(var(--light-accent-fg));
+@page-separator: rgb(var(--page-separator));
+@light-separator: rgb(var(--light-separator));
+@lighter-separator: rgb(var(--lighter-separator));
 
-@ad: var(--ad);
-@search: var(--search);
-@search-fg: var(--search-fg);
+@ad: rgb(var(--ad));
+@search: rgb(var(--search));
+@search-fg: rgb(var(--search-fg));
 
 // border radius for buttons, etc.
 @radius: var(--radius);
@@ -205,8 +228,8 @@
 @shade-both: @shade-top, @shade-bottom;
 @strong-shade-both: @strong-shade-top, @strong-shade-bottom;
 
-@focus-ring-anim-init: 0 0 0 20px @light-accent-0;
-@focus-ring: 0 0 0 4px @light-accent-50;
+@focus-ring-anim-init: 0 0 0 20px ~"rgb(var(--focus-accent)/0)";
+@focus-ring: 0 0 0 4px ~"rgb(var(--focus-accent)/0.5)";
 
 @subtle-shadow-below: 0 1px 0 rgba(0, 0, 0, 0.1);
 
@@ -215,12 +238,13 @@
 .button-base() {
     display: inline-block;
     border-radius: @radius;
-    border: 1px solid transparent;
+    border: var(--input-border-width) solid transparent;
     font: inherit;
     color: inherit;
     line-height: 1.3;
     padding: 0.2em 1em;
     margin: 0 0.2em;
+    box-shadow: var(--input-box-shadow);
     text-decoration: none;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -228,13 +252,13 @@
 
 @keyframes input-focusable-focus-ring-in {
     0% {
-        box-shadow: @focus-ring-anim-init;
+        box-shadow: var(--input-box-shadow), @focus-ring-anim-init;
     }
 }
 
 .button-focus-focused() {
     outline: none;
-    box-shadow: @focus-ring;
+    box-shadow: var(--input-box-shadow), @focus-ring;
     animation: input-focusable-focus-ring-in 0.4s @easing;
 }
 

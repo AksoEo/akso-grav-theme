@@ -34,7 +34,7 @@ class MdNewsSidebar {
     }
 
     private static function createError($doc) {
-        $el = $doc->createElement('div', Grav::instance()['language']->translate('THEME_TEJO.content.render_error'));
+        $el = $doc->createElement('div', Grav::instance()['language']->translate('THEME_AKSO.content.render_error'));
         $el->class = 'md-render-error';
         return $el;
     }
@@ -55,8 +55,8 @@ class MdNewsSidebar {
             $newNews->class = 'news-sidebar';
 
             try {
-                $readMoreLabel = $language->translate('THEME_TEJO.content.news_read_more');
-                $moreNewsLabel = $language->translate('THEME_TEJO.content.news_sidebar_more_news');
+                $readMoreLabel = $language->translate('THEME_AKSO.content.news_read_more');
+                $moreNewsLabel = $language->translate('THEME_AKSO.content.news_sidebar_more_news');
 
                 $params = json_decode($textContent, true);
 

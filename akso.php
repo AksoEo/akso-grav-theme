@@ -5,12 +5,12 @@ use Grav\Common\Theme;
 use Grav\Plugin\AksoMdExt\MarkdownExt;
 use RocketTheme\Toolbox\Event\Event;
 
-class TEJO extends Theme {
+class Akso extends Theme {
     public static function getSubscribedEvents() {
         return [
             'onThemeInitialized' => ['onThemeInitialized', 0],
             'onMarkdownInitialized' => ['onMarkdownInitialized', 0],
-            'onOutputGenerated' => ['onOutputGenerated', 0],
+            'onOutputGenerated' => ['onOutputGenerated', 1000],
         ];
     }
 

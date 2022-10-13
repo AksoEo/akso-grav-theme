@@ -170,7 +170,7 @@ class MdCarousel {
                     $pageContainer->class .= ' page-has-caption';
                 }
 
-                $pageLabel = $language->translate(['THEME_TEJO.content.img_carousel_page_label', ($i + 1), count($pages)]);
+                $pageLabel = $language->translate(['THEME_AKSO.content.img_carousel_page_label', ($i + 1), count($pages)]);
                 $pageContainer->setAttribute('data-label', $pageLabel);
 
                 $pagesContainer->appendChild($pageContainer);
@@ -191,7 +191,7 @@ class MdCarousel {
             if (sizeof($pages) === 1) {
                 $carousel->class .= ' is-single-page';
             }
-            $carousel->setAttribute('data-pagination-label', $language->translate('THEME_TEJO.content.img_carousel_pagination'));
+            $carousel->setAttribute('data-pagination-label', $language->translate('THEME_AKSO.content.img_carousel_pagination'));
         }
     }
 }

@@ -1,5 +1,5 @@
-# TEJO Theme
-The **TEJO** theme for [Grav CMS](http://github.com/getgrav/grav). 
+# AKSO Theme
+The **AKSO** theme for [Grav CMS](http://github.com/getgrav/grav).
 
 ## Support Targets
 Browserslist `>= 2%`:

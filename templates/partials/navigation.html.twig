@@ -35,16 +35,16 @@
         <li class="{{ page_class }} has-subpages">
             {% set checkbox_id = "main-nav-dropdown-#{page.url}" %}
             <input type="checkbox" id="{{ checkbox_id }}" class="subpage-expand-state" />
-            <a href="{{ page.url|e('html_attr') }}" aria-label="{{'THEME_TEJO.NAVIGATION.PAGE_ARIA_TITLE_WITH_SUBPAGES'|t(page.menu)}}">
+            <a href="{{ page.url|e('html_attr') }}" aria-label="{{'THEME_AKSO.NAVIGATION.PAGE_ARIA_TITLE_WITH_SUBPAGES'|t(page.menu)}}">
                 <span class="page-title">{{ page.menu|e }}</span>
                 <label
                     for="{{ checkbox_id }}"
                     class="subpage-expand"
                     aria-role="checkbox"
-                    aria-label="{{ 'THEME_TEJO.NAVIGATION.NAV_SUBPAGES_TOGGLE'|t(page.menu) }}">
+                    aria-label="{{ 'THEME_AKSO.NAVIGATION.NAV_SUBPAGES_TOGGLE'|t(page.menu) }}">
                 </label>
             </a>
-            <ul class="subpages" role="list" aria-label="{{ 'THEME_TEJO.NAVIGATION.NAV_SUBPAGES'|t(page.menu) }}">
+            <ul class="subpages" role="list" aria-label="{{ 'THEME_AKSO.NAVIGATION.NAV_SUBPAGES'|t(page.menu) }}">
                 {% for subpage in page.children.visible %}
                     {% set page_class = '' %}
                     {% if subpage.active %}
@@ -99,7 +99,7 @@
     {% endif %}
 {% endfor %}
 {% if active_top_level_page != null and active_top_level_page.children.visible.count > 0 %}
-    <div id="nav-sidebar" role="navigation" aria-label="{{ "THEME_TEJO.NAVIGATION.NAV_SIDEBAR_TITLE"|t }}">
+    <div id="nav-sidebar" role="navigation" aria-label="{{ "THEME_AKSO.NAVIGATION.NAV_SIDEBAR_TITLE"|t }}">
         <div class="inner-nav-sidebar" role="list">
         {#
             this macro renders a single level of sidebar pages and recursively calls itself to
@@ -118,7 +118,7 @@
                             <input
                                 class="subpage-state-checkbox"
                                 type="checkbox"
-                                aria-label="{{"THEME_TEJO.NAVIGATION.SIDEBAR_COLLAPSE_LABEL"|t(p.menu)}}"
+                                aria-label="{{"THEME_AKSO.NAVIGATION.SIDEBAR_COLLAPSE_LABEL"|t(p.menu)}}"
                                 id="{{ checkbox_id }}"
                                 {{ item_should_be_expanded_at_init ? 'checked' : '' }} />
                             <div class="subpage-inner is-split" href="{{ p.url }}">
