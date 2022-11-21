@@ -8,7 +8,13 @@
 <head>
 {% block head %}
     <meta charset="utf-8" />
-    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+    {% set _resolved_page_title = '' %}
+    {% if page_title_override is defined and page_title_override %}
+        {% set _resolved_page_title = page_title_override %}
+    {% elseif header.title %}
+        {% set _resolved_page_title = header.title|e('html') %}
+    {% endif %}
+    <title>{% if _resolved_page_title %}{{ _resolved_page_title }} | {% endif %}{{ site.title|e('html') }}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#f3f3f3" />
