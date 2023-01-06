@@ -9,9 +9,8 @@
     <div class="bli-header">
         <h3 class="bli-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
         <div class="bli-date">
-            <time class="bli-published" datetime="{{ page.date|date("c") }}">
-                {#{ page.date|date(system.pages.dateformat.short) }#}
-                {{ page.date|date("Y-m-d") }}
+            <time class="bli-published dyn-datestamp" datetime="{{ page.date|date('c') }}">
+                {{ page.date|akso_date }}
             </time>
         </div>
     </div>

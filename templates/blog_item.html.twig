@@ -11,9 +11,8 @@
     <h3>{{ page.header.subtitle }}</h3>
     {% endif %}
     <p>
-        <time class="bli-published" datetime="{{ page.date|date("c") }}">
-            {#{ page.date|date(system.pages.dateformat.short) }#}
-            {{ page.date|date("Y-m-d") }}
+        <time class="bli-published dyn-datestamp" datetime="{{ page.date|date('c') }}">
+            {{ page.date|akso_date }}
         </time>
     </p>
     {#% include 'partials/blog/taxonomy.html.twig' %#}
