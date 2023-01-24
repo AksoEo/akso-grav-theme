@@ -55,11 +55,11 @@ class MdCarousel {
 
         $carouselIdCounter = 0;
         $carousels = $doc->find('figure.carousel');
-        $didPassImg = false;
         foreach ($carousels as $carousel) {
             $topLevelChildren = $carousel->children();
             $pages = array();
             $currentCaption = array();
+            $didPassImg = false;
             foreach ($topLevelChildren as $tlChild) {
                 $tlChild->remove();
 
