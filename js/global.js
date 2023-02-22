@@ -221,23 +221,20 @@ for (var i = 0; i < addresses.length; i++) {
 }
 
 // sidebar expand/collapse animation
-if (window.requestAnimationFrame && ('ontransitionend' in document.body)) {
+if ('animate' in HTMLElement.prototype) {
     var sidebarCheckboxes = document.querySelectorAll('#nav-sidebar li > .subpage-state-checkbox');
     for (var i = 0; i < sidebarCheckboxes.length; i++) {
         var checkbox = sidebarCheckboxes[i];
         var li = checkbox.parentNode;
-        var subpageList = li.querySelector('.subpage-list');
-
-        checkbox.subpageList = subpageList;
+        checkbox.subpageList = li.querySelector('.subpage-list');
 
         checkbox.addEventListener('click', function (event) {
             var reduceMotion = window.matchMedia
                 && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
 
             var subpageList = this.subpageList;
             var checkbox = this;
-
-            if (reduceMotion) return;
 
             if (subpageList.dataset.animating === 'true') {
                 event.preventDefault();
@@ -248,55 +245,60 @@ if (window.requestAnimationFrame && ('ontransitionend' in document.body)) {
                 // was checked; should collapse now
                 subpageList.dataset.animating = 'true';
                 subpageList.style.display = 'block';
+                subpageList.style.overflow = 'hidden';
 
-                requestAnimationFrame(function () {
-                    var fullHeight = subpageList.offsetHeight;
-                    subpageList.style.height = subpageList.offsetHeight + 'px';
-                    subpageList.style.transition = 'all 0.3s cubic-bezier(.2, .3, 0, 1)'
-                    subpageList.style.overflow = 'hidden';
-
-                    requestAnimationFrame(function () {
-                        subpageList.style.height = '0px';
-                        subpageList.style.paddingTop = '0px';
-                        subpageList.style.opacity = '0';
-
-                        function onTransitionEnd () {
-                            subpageList.removeEventListener('transitionend', onTransitionEnd);
-                            subpageList.style.height = '';
-                            subpageList.style.paddingTop = '';
-                            subpageList.style.transition = '';
-                            subpageList.style.display = '';
-                            subpageList.style.opacity = '';
-                            subpageList.style.overflow = '';
-                            subpageList.dataset.animating = 'false';
-                        }
-                        subpageList.addEventListener('transitionend', onTransitionEnd);
-                    });
+                var fullHeight = subpageList.offsetHeight;
+                var animation = subpageList.animate([
+                    {
+                        height: fullHeight + 'px',
+                        opacity: '1'
+                    },
+                    {
+                        height: '0px',
+                        paddingTop: '0px',
+                        opacity: '0',
+                        borderTopWidth: '0px',
+                        borderBottomWidth: '0px',
+                    }
+                ], {
+                    duration: 300,
+                    easing: 'cubic-bezier(.2, .3, 0, 1)'
+                });
+                animation.addEventListener('cancel', function () {
+                    subpageList.style.display = '';
+                    subpageList.style.overflow = '';
+                    subpageList.dataset.animating = 'false';
+                });
+                animation.addEventListener('finish', function () {
+                    subpageList.style.display = '';
+                    subpageList.style.overflow = '';
+                    subpageList.dataset.animating = 'false';
                 });
             } else {
                 // was not checked; should expand now
                 subpageList.dataset.animating = 'true';
+                subpageList.style.overflow = 'hidden';
 
-                requestAnimationFrame(function () {
-                    var fullHeight = subpageList.offsetHeight;
-                    subpageList.style.height = '0px';
-                    subpageList.style.paddingTop = '0px';
-                    subpageList.style.transition = 'all 0.3s cubic-bezier(.2, .3, 0, 1)'
-                    subpageList.style.overflow = 'hidden';
-
-                    requestAnimationFrame(function () {
-                        subpageList.style.height = fullHeight + 'px';
-                        subpageList.style.paddingTop = '';
-
-                        function onTransitionEnd () {
-                            subpageList.removeEventListener('transitionend', onTransitionEnd);
-                            subpageList.style.height = '';
-                            subpageList.style.transition = '';
-                            subpageList.style.overflow = '';
-                            subpageList.dataset.animating = 'false';
-                        }
-                        subpageList.addEventListener('transitionend', onTransitionEnd);
-                    });
+                var fullHeight = subpageList.offsetHeight;
+                var animation = subpageList.animate([
+                    {
+                        height: '0px',
+                        paddingTop: '0px'
+                    },
+                    {
+                        height: fullHeight + 'px'
+                    }
+                ], {
+                    duration: 300,
+                    easing: 'cubic-bezier(.2, .3, 0, 1)'
+                });
+                animation.addEventListener('cancel', function () {
+                    subpageList.style.overflow = '';
+                    subpageList.dataset.animating = 'false';
+                });
+                animation.addEventListener('finish', function () {
+                    subpageList.style.overflow = '';
+                    subpageList.dataset.animating = 'false';
                 });
             }
         });
