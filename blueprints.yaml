@@ -12,7 +12,7 @@ form:
   fields:
     nav_dropdown:
       type: toggle
-      label: Nav Dropdown
+      label: THEME_AKSO.SETTINGS.NAV_DROPDOWN
       default: 0
       highlight: 1
       options:
@@ -22,73 +22,73 @@ form:
         type: bool
     logoAlt:
         type: string
-        label: Logo Alt-Text
+        label: THEME_AKSO.SETTINGS.LOGO_ALT
         highlight: 1
-        default: "alt-text goes here"
+        default: ""
         validate:
           type: string
     logoSubtitle:
         type: string
-        label: Logo Subtitle
+        label: THEME_AKSO.SETTINGS.LOGO_SUBTITLE
         highlight: 1
-        default: "subtitle goes here"
+        default: ""
         validate:
           type: string
     footerLines:
         type: array
-        label: Footer Lines
+        label: THEME_AKSO.SETTINGS.FOOTER_LINES
         default: []
         value_only: true
-        placeholder_value: "line contents go here"
+        placeholder_value: ""
         validate:
           type: array
     footerData:
         type: list
         style: vertical
-        label: Footer Metadata
+        label: THEME_AKSO.SETTINGS.FOOTER_DATA
         fields:
           .label:
             type: text
-            label: Label
+            label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LABEL
           .value:
             type: text
-            label: Link Text
+            label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LINK_TEXT
           .url:
             type: text
-            label: Link
+            label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LINK
     footerSocial:
         type: list
         style: vertical
-        label: Footer Social Links
+        label: THEME_AKSO.SETTINGS.FOOTER_SOCIAL
         fields:
           .id:
             type: text
-            label: Icon Name
+            label: THEME_AKSO.SETTINGS.FOOTER_SOCIAL_FIELD_ICON
           .name:
             type: text
-            label: Alt-Text
+            label: THEME_AKSO.SETTINGS.FOOTER_SOCIAL_FIELD_ALT
           .url:
             type: text
-            label: Link
+            label: THEME_AKSO.SETTINGS.FOOTER_SOCIAL_FIELD_LINK
     footerMail:
         type: email
-        label: Footer Email
+        label: THEME_AKSO.SETTINGS.FOOTER_EMAIL
         default: "example@example.com"
     search_path:
       type: text
-      label: Global Search Path
+      label: THEME_AKSO.SETTINGS.SEARCH_PATH
     search_label:
       type: text
-      label: Global Search Label
+      label: THEME_AKSO.SETTINGS.SEARCH_LABEL
     support_link:
       type: text
-      label: Support Button Link
+      label: THEME_AKSO.SETTINGS.SUPPORT_LINK
     support_label:
       type: text
-      label: Support Button Label
+      label: THEME_AKSO.SETTINGS.SUPPORT_LABEL
     allow_dark:
       type: toggle
-      label: Dark Color Scheme Support
+      label: THEME_AKSO.SETTINGS.ALLOW_DARK
       default: 0
       highlight: 1
       options:
