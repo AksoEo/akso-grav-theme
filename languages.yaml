@@ -4,6 +4,8 @@ eo:
       NAV_DROPDOWN: '[[Nav dropdowns]]'
       LOGO_ALT: '[[Logo alt-text]]'
       LOGO_SUBTITLE: '[[Logo subtitle]]'
+      TITLE_SHORT: '[[Short title for mobile]]'
+      TITLE_SUBTITLE: '[[Subtitle]]'
       FOOTER_LINES: '[[Footer lines]]'
       FOOTER_DATA: '[[Footer data fields]]'
       FOOTER_DATA_FIELD_LABEL: '[[Label]]'
