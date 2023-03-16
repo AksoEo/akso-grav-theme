@@ -1,5 +1,10 @@
+// General interactivity for this theme
+// Language level ES5
+
+// CSS media width for using the split page layout (also see CSS)
 var cssmWidthSplitPage = 800;
 
+// animates node[property] to the target value
 function animateScrolling (node, property, target) {
     var easing = function (t) {
         return 1 - Math.pow(2, -10 * t);
@@ -21,74 +26,79 @@ function animateScrolling (node, property, target) {
     loop();
 }
 
-// scrolling header
-var mainNav = document.querySelector('.main-nav');
-mainNav.classList.add('is-scrollable');
-var mainNavScrollable = document.querySelector('.main-nav > ul');
-var mainNavScrollLeft = document.createElement('button');
-mainNavScrollLeft.setAttribute('aria-hidden', 'true');
-var mainNavScrollRight = document.createElement('button');
-mainNavScrollRight.setAttribute('aria-hidden', 'true');
-mainNavScrollLeft.className = 'nav-scroll-button is-left at-edge';
-mainNavScrollRight.className = 'nav-scroll-button is-right at-edge';
-mainNavScrollLeft.setAttribute('aria-label', '←');
-mainNavScrollRight.setAttribute('aria-label', '→');
-function isCompactNav () {
-    return mainNav.querySelector('.compact-nav-header').offsetHeight > 0;
-}
-function updateScrollingHeaderButtons () {
-    if (mainNavScrollable.classList.contains('interactive-scrollable')) {
-        var atLeftEdge = mainNavScrollable.scrollLeft <= 0;
-        var atRightEdge = mainNavScrollable.scrollLeft >= mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
-        if (atLeftEdge) mainNavScrollLeft.classList.add('at-edge');
-        else mainNavScrollLeft.classList.remove('at-edge');
-        if (atRightEdge) mainNavScrollRight.classList.add('at-edge');
-        else mainNavScrollRight.classList.remove('at-edge');
-    }
-}
-function updateScrollingHeader() {
-    if (mainNavScrollable.scrollWidth > mainNavScrollable.offsetWidth) {
-        // scrolling
-        if (!mainNavScrollLeft.parentNode) {
-            mainNavScrollable.classList.add('interactive-scrollable');
-            mainNav.appendChild(mainNavScrollLeft);
-            mainNav.appendChild(mainNavScrollRight);
-        }
+{
+    // scrolling header
+    var mainNav = document.querySelector('.main-nav');
+    mainNav.classList.add('is-scrollable');
+    var mainNavScrollable = document.querySelector('.main-nav > ul');
+    var mainNavScrollLeft = document.createElement('button');
+    mainNavScrollLeft.setAttribute('aria-hidden', 'true');
+    var mainNavScrollRight = document.createElement('button');
+    mainNavScrollRight.setAttribute('aria-hidden', 'true');
+    mainNavScrollLeft.className = 'nav-scroll-button is-left at-edge';
+    mainNavScrollRight.className = 'nav-scroll-button is-right at-edge';
+    mainNavScrollLeft.setAttribute('aria-label', '←');
+    mainNavScrollRight.setAttribute('aria-label', '→');
 
-        var selected = mainNavScrollable.querySelector('.selected');
-        if (selected) {
-            var maxScroll = mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
-            // center selected
-            var targetScroll = selected.offsetLeft - (mainNavScrollable.offsetWidth - selected.offsetWidth) / 2;
-            mainNavScrollable.scrollLeft = Math.max(0, Math.min(maxScroll, targetScroll));
-        }
-        updateScrollingHeaderButtons();
-    } else {
-        if (mainNavScrollLeft.parentNode) {
-            mainNavScrollable.classList.remove('interactive-scrollable');
-            mainNav.removeChild(mainNavScrollLeft);
-            mainNav.removeChild(mainNavScrollRight);
+    function isCompactNav () {
+        return mainNav.querySelector('.compact-nav-header').offsetHeight > 0;
+    }
+
+    // hides and shows header scrolling buttons
+    function updateScrollingHeaderButtons () {
+        if (mainNavScrollable.classList.contains('interactive-scrollable')) {
+            var atLeftEdge = mainNavScrollable.scrollLeft <= 0;
+            var atRightEdge = mainNavScrollable.scrollLeft >= mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
+            if (atLeftEdge) mainNavScrollLeft.classList.add('at-edge');
+            else mainNavScrollLeft.classList.remove('at-edge');
+            if (atRightEdge) mainNavScrollRight.classList.add('at-edge');
+            else mainNavScrollRight.classList.remove('at-edge');
         }
     }
+    function updateScrollingHeader () {
+        if (mainNavScrollable.scrollWidth > mainNavScrollable.offsetWidth) {
+            // scrolling
+            if (!mainNavScrollLeft.parentNode) {
+                mainNavScrollable.classList.add('interactive-scrollable');
+                mainNav.appendChild(mainNavScrollLeft);
+                mainNav.appendChild(mainNavScrollRight);
+            }
+
+            var selected = mainNavScrollable.querySelector('.selected');
+            if (selected) {
+                var maxScroll = mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
+                // center selected
+                var targetScroll = selected.offsetLeft - (mainNavScrollable.offsetWidth - selected.offsetWidth) / 2;
+                mainNavScrollable.scrollLeft = Math.max(0, Math.min(maxScroll, targetScroll));
+            }
+            updateScrollingHeaderButtons();
+        } else {
+            if (mainNavScrollLeft.parentNode) {
+                mainNavScrollable.classList.remove('interactive-scrollable');
+                mainNav.removeChild(mainNavScrollLeft);
+                mainNav.removeChild(mainNavScrollRight);
+            }
+        }
+    }
+    mainNavScrollable.addEventListener('scroll', updateScrollingHeaderButtons, { passive: true });
+    updateScrollingHeader();
+    // sometimes it just does not apply properly due to fonts not being loaded or something (Safari 14)
+    window.addEventListener('DOMContentLoaded', updateScrollingHeader);
+    setTimeout(updateScrollingHeader, 100);
+    setTimeout(updateScrollingHeader, 1000);
+    window.addEventListener('resize', updateScrollingHeader);
+    mainNavScrollLeft.addEventListener('click', function (e) {
+        e.preventDefault(); // prevent double-tap to zoom
+        var target = Math.max(0, mainNavScrollable.scrollLeft - 100);
+        animateScrolling(mainNavScrollable, 'scrollLeft', target);
+    });
+    mainNavScrollRight.addEventListener('click', function (e) {
+        e.preventDefault(); // prevent double-tap to zoom
+        var max = mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
+        var target = Math.min(max, mainNavScrollable.scrollLeft + 100);
+        animateScrolling(mainNavScrollable, 'scrollLeft', target);
+    });
 }
-mainNavScrollable.addEventListener('scroll', updateScrollingHeaderButtons, { passive: true });
-updateScrollingHeader();
-// sometimes it just does not apply properly due to fonts not being loaded or something (Safari 14)
-window.addEventListener('DOMContentLoaded', updateScrollingHeader);
-setTimeout(updateScrollingHeader, 100);
-setTimeout(updateScrollingHeader, 1000);
-window.addEventListener('resize', updateScrollingHeader);
-mainNavScrollLeft.addEventListener('click', function (e) {
-    e.preventDefault(); // prevent double-tap to zoom
-    var target = Math.max(0, mainNavScrollable.scrollLeft - 100);
-    animateScrolling(mainNavScrollable, 'scrollLeft', target);
-});
-mainNavScrollRight.addEventListener('click', function (e) {
-    e.preventDefault(); // prevent double-tap to zoom
-    var max = mainNavScrollable.scrollWidth - mainNavScrollable.offsetWidth;
-    var target = Math.min(max, mainNavScrollable.scrollLeft + 100);
-    animateScrolling(mainNavScrollable, 'scrollLeft', target);
-});
 
 {
     var itemsWithSubpages = mainNav.querySelectorAll('.has-subpages');
@@ -159,7 +169,7 @@ mainNavScrollRight.addEventListener('click', function (e) {
     }
 }
 
-// collapse and expand nav bar the * button
+// collapse and expand nav bar using the * button
 var navCollapseCheckbox = document.querySelector('#nav-collapse');
 var compactNavHeader = document.querySelector('.compact-nav-header');
 window.addEventListener('keydown', function (e) {
@@ -185,7 +195,7 @@ if (pageSplit) {
     }
 }
 
-// activate addresses
+// decode email addresses
 var addresses = document.querySelectorAll('.non-interactive-address');
 for (var i = 0; i < addresses.length; i++) {
     var address = addresses[i];
@@ -363,17 +373,12 @@ function getTimeInterval(fromDate, toDate) {
     return { invert, years, months, days, rawDays, hours, minutes, seconds };
 }
 function formatDuration(timeInterval) {
-    function mod(n, m) {
-        return (((n % m) + m) % m);
-    }
-
     var prefix = timeInterval.invert ? 'antaŭ ' : 'post ';
     var years = timeInterval.years;
     var months = timeInterval.months;
     var days = timeInterval.days;
     var hours = timeInterval.hours;
     var minutes = timeInterval.minutes;
-    var seconds = timeInterval.seconds;
 
     var out = '';
     var space = '\u2060';

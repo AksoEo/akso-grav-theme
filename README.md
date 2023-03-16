@@ -11,5 +11,5 @@ Browserslist `>= 2%`:
 - Samsung Internet 10.1
 
 ## Installation
-Run `npm run build` upon installation to compile the CSS.
+Run `npm install`, `npm run build` upon installation to compile the CSS.
 Also run `composer install` to install php dependencies.

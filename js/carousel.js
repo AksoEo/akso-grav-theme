@@ -1,10 +1,11 @@
-//! This file contains code for image carousels.
+// Interactive image carousels (also see mdext/MdCarousel.php)
+// Language level ES6+
 
 const CAN_USE_CLIP_PATH = window.CSS && window.CSS.supports
     && (window.CSS.supports('clip-path: inset(0 0 0 0)')
         || window.CSS.supports('-webkit-clip-path: inset(0 0 0 0)'));
 
-// image carousels
+// a carousel page will be shown for this number of seconds before advancing
 const CAROUSEL_TIMEOUT = 8;
 
 const carousels = document.querySelectorAll('figure.carousel');

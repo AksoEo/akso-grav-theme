@@ -1,4 +1,5 @@
-//! This file contains code for flap display countdowns.
+// Split-flap display countdowns
+// Language level ES6+
 
 class FlapDisplayCell {
     constructor () {
