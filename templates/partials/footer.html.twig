@@ -3,7 +3,7 @@
         {% for p in grav.theme.config.footerSocial %}
             <li>
                 <a target="_blank" rel="noreferrer" href="{{ p.url }}" class="footer-social-link">
-                    <img src="{{ url("theme://images/social/#{p.id}.svg") }}" alt="{{ p.name|e('html_attr') }}" title="{{ p.name|e('html_attr') }}" />
+                    <img loading="lazy" src="{{ url("theme://images/social/#{p.id}.svg") }}" alt="{{ p.name|e('html_attr') }}" title="{{ p.name|e('html_attr') }}" />
                 </a>
             </li>
         {% endfor %}
@@ -22,4 +22,10 @@
         {% endfor %}
     </ul>
     <a href="mailto:{{ grav.theme.config.footerMail|e('html_attr') }}">{{ grav.theme.config.footerMail|e }}</a>
+    <p class="footer-powered-by">
+        {{ "THEME_AKSO.NAVIGATION.FOOTER_POWERED_BY"|t }}
+        <a href="https://akso.org" target="_blank" rel="noopener">
+            <img loading="lazy" src="{{ url("theme://images/akso-with-text.svg") }}" alt="AKSO" />
+        </a>
+    </p>
 </footer>

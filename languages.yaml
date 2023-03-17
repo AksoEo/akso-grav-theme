@@ -29,6 +29,7 @@ eo:
       NAV_SUBPAGES_TOGGLE: 'Eniri subpaĝojn de %s'
       NAV_SIDEBAR_TITLE: 'Trairi paĝojn de tiu ĉi sekcio'
       SIDEBAR_COLLAPSE_LABEL: 'Montri subpaĝojn: %s'
+      FOOTER_POWERED_BY: '[[Powered by]]'
     PAGINATION:
       TITLE: 'Trairi paĝojn'
       PREV_PAGE: 'Antaŭa paĝo'
