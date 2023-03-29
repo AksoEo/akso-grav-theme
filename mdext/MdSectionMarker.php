@@ -41,7 +41,7 @@ class MdSectionMarker {
                 $elements = new Document($innerHtml);
                 $elements = $elements->find('body')[0];
                 foreach ($elements->children() as $el) {
-                    if ($el->tag === 'p') {
+                    if ($el->isElementNode() && $el->tag === 'p') {
                         foreach ($el->children() as $child) $contentSpan->appendChild($child);
                     } else {
                         $contentSpan->appendChild($el);

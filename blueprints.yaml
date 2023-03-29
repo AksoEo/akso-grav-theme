@@ -56,6 +56,17 @@ form:
           .url:
             type: text
             label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LINK
+    footerLinks:
+      type: list
+      style: vertical
+      label: THEME_AKSO.SETTINGS.FOOTER_LINKS
+      fields:
+        .label:
+          type: text
+          label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LABEL
+        .url:
+          type: text
+          label: THEME_AKSO.SETTINGS.FOOTER_DATA_FIELD_LINK
     footerSocial:
         type: list
         style: vertical

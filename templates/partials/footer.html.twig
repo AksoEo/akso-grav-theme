@@ -21,6 +21,13 @@
             </li>
         {% endfor %}
     </ul>
+    <ul class="footer-links">
+        {% for p in grav.theme.config.footerLinks %}
+            <li>
+                <a href="{{ p.url|e('html_attr') }}" class="footer-metadata-link">{{ p.label|e }}</a>
+            </li>
+        {% endfor %}
+    </ul>
     <a href="mailto:{{ grav.theme.config.footerMail|e('html_attr') }}">{{ grav.theme.config.footerMail|e }}</a>
     <p class="footer-powered-by">
         {{ "THEME_AKSO.NAVIGATION.FOOTER_POWERED_BY"|t }}

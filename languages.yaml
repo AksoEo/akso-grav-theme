@@ -8,6 +8,7 @@ eo:
       TITLE_SUBTITLE: '[[Subtitle]]'
       FOOTER_LINES: '[[Footer lines]]'
       FOOTER_DATA: '[[Footer data fields]]'
+      FOOTER_LINKS: '[[Footer links]]'
       FOOTER_DATA_FIELD_LABEL: '[[Label]]'
       FOOTER_DATA_FIELD_LINK_TEXT: '[[Link Text]]'
       FOOTER_DATA_FIELD_LINK: '[[Link]]'
