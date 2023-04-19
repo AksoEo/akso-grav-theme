@@ -442,3 +442,23 @@ setInterval(updateActiveCountdowns, 30000);
         timestamp.textContent = formatDateTime(new Date(timestamp.getAttribute('datetime')));
     }
 }
+
+{
+    // forms that auto-submit when <select> changes
+    var forms = document.querySelectorAll('form[data-select-auto-form]');
+    for (var i = 0; i < forms.length; i++) {
+        var form = forms[i];
+        var selectName = form.getAttribute('data-select-auto-form');
+        var select = form.querySelector('[name="' + selectName + '"]');
+        if (!select) continue;
+
+        select.addEventListener('change', function () {
+            this.form.submit();
+        });
+
+        var submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.parentNode.removeChild(submitButton);
+        }
+    }
+}
