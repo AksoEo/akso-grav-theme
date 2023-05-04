@@ -211,6 +211,7 @@ class MarkdownExt {
             $mailAddress = $hrefParts[0];
             $params = $hrefParts[1] ?? '';
 
+            if (!str_contains($mailAddress, '@')) continue;
             $textContent = trim($anchor->text());
             if (mb_strtolower($textContent) !== mb_strtolower($mailAddress)) {
                 // can't obfuscate with contents
