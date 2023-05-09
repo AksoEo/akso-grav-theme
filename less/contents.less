@@ -31,7 +31,7 @@
     vertical-align: bottom;
     text-decoration: none;
     --magazine-cover-width: 8em;
-    min-height: calc(var(--magazine-cover-width) * 1.4142135624);
+    min-height: calc(var(--magazine-cover-width) * 1.3);
 
     .magazine-cover {
         display: block;
@@ -373,7 +373,7 @@
         max-width: calc(var(--max-content-width) + 2em);
         box-sizing: border-box;
         margin-left: auto;
-        --section-marker-bg: @bg1;
+        --section-marker-bg: var(--bg1);
 
         .breadcrumbs-container {
             font-size: 0.9em;
@@ -427,8 +427,16 @@
                 align-items: center;
                 position: sticky;
                 top: 0;
+                z-index: 5;
                 background: @f-bg1;
-                background: var(--section-marker-bg);
+                background: ~"linear-gradient(
+                    rgb(var(--section-marker-bg)) 0%,
+                    rgb(var(--section-marker-bg)) 90%,
+                    rgb(var(--section-marker-bg) / 0.7) 93%,
+                    rgb(var(--section-marker-bg) / 0.3) 95%,
+                    rgb(var(--section-marker-bg) / 0.1) 97%,
+                    rgb(var(--section-marker-bg) / 0) 100%
+                )";
                 color: @f-accent;
                 color: @accent;
                 padding: 0.5em 0;
@@ -479,7 +487,7 @@
             border-left: var(--info-box-border-width) solid @f-second-accent;
             border-left-color: @second-accent;
             box-shadow: var(--info-box-shadow);
-            --section-marker-bg: @bg;
+            --section-marker-bg: var(--bg);
 
             &:first-child,
             :first-child {
