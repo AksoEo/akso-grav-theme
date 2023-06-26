@@ -154,6 +154,11 @@ class MarkdownExt {
                 if (!$currentContainer) {
                     $currentContainer = new Element('div');
                     $currentContainer->class = 'content-container';
+
+                    // keep lang attribute
+                    if ($rootNode->hasAttribute('lang')) {
+                        $currentContainer->setAttribute('lang', $rootNode->getAttribute('lang'));
+                    }
                 }
 
                 $sectionNode = new Element('section');

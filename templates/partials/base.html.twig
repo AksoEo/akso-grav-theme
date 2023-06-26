@@ -116,7 +116,11 @@
 {% endblock %}
 
 {% block body %}
-    <main id="main-content">
+    <main id="main-content"
+        {% if header.content_lang is not empty %}
+            lang="{{ header.content_lang }}"
+        {% endif %}
+    >
         <div class="breadcrumbs-container">
             {% include 'partials/breadcrumbs.html.twig' %}
         </div>
