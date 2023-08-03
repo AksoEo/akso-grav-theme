@@ -40,7 +40,6 @@
                 <label
                     for="{{ checkbox_id }}"
                     class="subpage-expand"
-                    aria-role="checkbox"
                     aria-label="{{ 'THEME_AKSO.NAVIGATION.NAV_SUBPAGES_TOGGLE'|t(page.menu) }}">
                 </label>
             </a>
@@ -106,37 +105,30 @@
             render the levels below.
         #}
         {% macro sidebar_pages(px, sc_id_prefix) %}
-            {% set sc_id_ctr = 0 %}
             {% for p in px.children.visible %}
                 {% set li_class = (p.active) ? 'selected' : '' %}
                 {% set item_has_children = p.children.visible.count > 0 %}
                 {% set item_should_be_expanded_at_init = p.active or p.activeChild %}
                     {% if item_has_children %}
-                        {% set checkbox_id = "sidebar-collapse-#{sc_id_prefix}#{sc_id_ctr}" %}
-                        {% set sc_id_ctr = sc_id_ctr + 1 %}
-                        <li class="{{ li_class }}" role="listitem">
-                            <input
-                                class="subpage-state-checkbox"
-                                type="checkbox"
-                                aria-label="{{"THEME_AKSO.NAVIGATION.SIDEBAR_COLLAPSE_LABEL"|t(p.menu)}}"
-                                id="{{ checkbox_id }}"
-                                {{ item_should_be_expanded_at_init ? 'checked' : '' }} />
-                            <div class="subpage-inner is-split" href="{{ p.url }}">
-                                <a class="subpage-inner-link" href="{{ p.url|e('html_attr') }}">
-                                    {{ p.menu|e }}
-                                </a>
-                                <label
-                                    for="{{ checkbox_id }}"
-                                    class="subpage-collapse-indicator"
-                                    role="presentation"
-                                    aria-hidden="true">
-                                    <span class="sci-line-a"></span>
-                                    <span class="sci-line-b"></span>
-                                </label>
-                            </div>
-                            <ul class="subpage-list" role="list">
-                                {{ _self.sidebar_pages(p, "#{sc_id_prefix}#{sc_id_ctr}") }}
-                            </ul>
+                        <li class="{{ li_class }} is-split" role="listitem">
+                            <a class="subpage-inner" href="{{ p.url|e('html_attr') }}">
+                                {{ p.menu|e }}
+                            </a>
+                            <details
+                                class="subpage-disclosure"
+                                {{ item_should_be_expanded_at_init ? 'open' : '' }}>
+                                <summary
+                                    class="subpage-disclosure-summary"
+                                    aria-label="{{"THEME_AKSO.NAVIGATION.SIDEBAR_COLLAPSE_LABEL"|t(p.menu)}}">
+                                    <div class="inner-icon">
+                                        <span class="sci-line-a"></span>
+                                        <span class="sci-line-b"></span>
+                                    </div>
+                                </summary>
+                                <ul class="subpage-list" role="list">
+                                    {{ _self.sidebar_pages(p, "#{sc_id_prefix}#{sc_id_ctr}") }}
+                                </ul>
+                            </details>
                         </li>
                     {% else %}
                         <li class="{{ li_class }}">

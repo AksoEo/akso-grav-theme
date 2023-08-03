@@ -183,15 +183,20 @@ window.addEventListener('keydown', function (e) {
 
 // expand all sidebar items by default on wide layouts
 var pageSplit = document.querySelector('.page-split');
+var shouldAnimateSidebarDisclosure = true;
 if (pageSplit) {
     // this does not always work
     // var pageHasSplitLayout = getComputedStyle(pageSplit).display.indexOf('flex') > -1;
     var pageHasSplitLayout = window.innerWidth > cssmWidthSplitPage;
     if (pageHasSplitLayout) {
-        var stateCheckboxes = document.querySelectorAll('.subpage-state-checkbox');
-        for (var i = 0; i < stateCheckboxes.length; i++) {
-            stateCheckboxes[i].checked = true;
+        shouldAnimateSidebarDisclosure = false;
+        var disclosures = document.querySelectorAll('#nav-sidebar .subpage-disclosure');
+        for (var i = 0; i < disclosures.length; i++) {
+            disclosures[i].open = true;
         }
+        setTimeout(function () {
+            shouldAnimateSidebarDisclosure = true;
+        }, 100);
     }
 }
 
@@ -232,26 +237,27 @@ for (var i = 0; i < addresses.length; i++) {
 
 // sidebar expand/collapse animation
 if ('animate' in HTMLElement.prototype) {
-    var sidebarCheckboxes = document.querySelectorAll('#nav-sidebar li > .subpage-state-checkbox');
-    for (var i = 0; i < sidebarCheckboxes.length; i++) {
-        var checkbox = sidebarCheckboxes[i];
-        var li = checkbox.parentNode;
-        checkbox.subpageList = li.querySelector('.subpage-list');
+    var sidebarDisclosures = document.querySelectorAll('#nav-sidebar li > .subpage-disclosure');
+    for (var i = 0; i < sidebarDisclosures.length; i++) {
+        var disclosure = sidebarDisclosures[i];
+        var li = disclosure.parentNode;
+        disclosure.subpageList = disclosure.querySelector('.subpage-list');
 
-        checkbox.addEventListener('click', function (event) {
+        disclosure.addEventListener('toggle', function (event) {
             var reduceMotion = window.matchMedia
                 && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (reduceMotion) return;
+            if (!shouldAnimateSidebarDisclosure) return;
 
             var subpageList = this.subpageList;
-            var checkbox = this;
+            var disclosure = this;
 
             if (subpageList.dataset.animating === 'true') {
                 event.preventDefault();
                 return;
             }
 
-            if (!checkbox.checked) {
+            if (!disclosure.open) {
                 // was checked; should collapse now
                 subpageList.dataset.animating = 'true';
                 subpageList.style.display = 'block';
@@ -285,7 +291,7 @@ if ('animate' in HTMLElement.prototype) {
                     subpageList.dataset.animating = 'false';
                 });
             } else {
-                // was not checked; should expand now
+                // was not open; should expand now
                 subpageList.dataset.animating = 'true';
                 subpageList.style.overflow = 'hidden';
 

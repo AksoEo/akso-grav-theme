@@ -181,8 +181,38 @@
             width: 100%;
             margin-bottom: 0.2em;
 
-            .subpage-state-checkbox {
-                display: none;
+            &.is-split {
+                display: grid;
+                grid-template-rows: auto auto;
+                grid-template-columns: auto 2em;
+
+                & > .subpage-inner {
+                    display: block;
+                    position: relative;
+                    flex: 1;
+                    text-decoration: none;
+                    padding: 0.4em 0.3em 0.4em 1em;
+                    border-radius: @radius;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0.2em;
+                        right: 0;
+                        bottom: 0.2em;
+                        border-right: 1px solid @light-separator;
+                    }
+
+                    .button-focus();
+                }
+
+                & > .subpage-disclosure {
+                    display: contents;
+
+                    & > .subpage-list {
+                        grid-column: ~"1 / 3";
+                    }
+                }
             }
 
             .subpage-inner {
@@ -207,28 +237,6 @@
                     display: flex;
                     align-items: stretch;
                     padding: 0;
-
-                    & > a {
-                        display: block;
-                        position: relative;
-                        flex: 1;
-                        color: inherit;
-                        text-decoration: none;
-                        padding: 0.4em 0.3em 0.4em 1em;
-                        border-radius: @radius;
-
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            top: 0.2em;
-                            right: 0;
-                            bottom: 0.2em;
-                            border-right: 1px solid @light-separator;
-                        }
-
-                        .button-focus();
-                    }
-
                 }
             }
             &.selected {
@@ -238,23 +246,45 @@
                     box-shadow: 0 2px 4px #0003;
                 }
 
+                &.is-split > .subpage-inner {
+                    padding-right: 2.3em;
+                    margin-right: -2em;
+
+                    &::after {
+                        right: 2em;
+                    }
+                }
+
                 & > a.subpage-inner, & > .subpage-inner > a {
                     font-weight: bold;
                 }
             }
 
-            .subpage-collapse-indicator {
-                display: block;
-                cursor: default;
+            .subpage-disclosure-summary {
                 position: relative;
-                flex-shrink: 0;
-                width: 2em;
-                transform: rotate(-90deg);
-                transition: transform 0.3s @easing;
+                font-size: 0;
+                width: 100%;
+                min-height: 1rem;
                 border-radius: @radius;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 0.3s;
+
+                &:active {
+                    opacity: 0.5;
+                    transition: opacity 0.05s;
+                }
+
+                .inner-icon {
+                    transform: rotate(-90deg);
+                    transition: transform 0.3s @easing;
+                    position: relative;
+                }
 
                 .sci-line-a, .sci-line-b {
                     position: absolute;
+                    font-size: 1rem;
                     top: 50%;
                     left: 50%;
                     width: 0.8ch;
@@ -272,12 +302,10 @@
                 }
             }
 
-            .subpage-state-checkbox:focus ~ .subpage-inner .subpage-collapse-indicator {
-                .button-focus-focused();
-            }
-
-            .subpage-state-checkbox:checked ~ .subpage-inner .subpage-collapse-indicator {
-                transform: none;
+            .subpage-disclosure[open] > .subpage-disclosure-summary {
+                .inner-icon {
+                    transform: none;
+                }
 
                 .sci-line-a {
                     // transform: translateY(-0.2ch) rotate(45deg);
@@ -288,11 +316,11 @@
             }
 
             .subpage-list {
-                display: none;
                 margin: 0;
                 padding: 0;
                 padding-top: 0.2em;
                 padding-left: 1.5em;
+                padding-bottom: 0.5em;
                 list-style-type: none;
                 box-sizing: border-box;
                 border-top: 1px solid @f-accent;
@@ -304,12 +332,8 @@
                 }
             }
 
-            &.selected > .subpage-list {
+            &.selected > .subpage-disclosure > .subpage-list {
                 border-top: none;
-            }
-
-            .subpage-state-checkbox:checked ~ .subpage-list {
-                display: block;
             }
         }
 
