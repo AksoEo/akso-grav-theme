@@ -42,6 +42,7 @@ eo:
     BLOG:
       ITEM:
         CONTINUE_READING: 'Legi pli »'
+        SHORT_LINK_DESC: 'Mallonga ligilo al tiu ĉi Gazetara Komuniko'
         PREV_POST: 'Antaŭa komuniko'
         NEXT_POST: 'Venonta komuniko'
     TNTSEARCH:

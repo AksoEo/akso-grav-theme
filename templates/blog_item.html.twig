@@ -38,6 +38,27 @@
         </div>
     </div>
 
+
+    {% set short_link = '' %}
+    {% set short_link_len = 9999 %}
+    {% if page.header.routes %}
+        {% for alias in page.header.routes.aliases %}
+            {% if alias starts with '/gk/' %}
+                {% set this_len = alias|length %}
+                {% if this_len < short_link_len %}
+                    {% set short_link = 'https://uea.org' ~ alias %}
+                    {% set short_link_len = this_len %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% if short_link %}
+        <div class="blog-footer-metadata">
+            {{ 'THEME_AKSO.BLOG.ITEM.SHORT_LINK_DESC'|t }}:
+            <a href="{{ short_link|e('html_attr') }}">{{ short_link }}</a>
+        </div>
+    {% endif %}
+
     <p class="blog-prev-next">
         {% if not page.isLast %}
         <a class="link-button" href="{{ page.prevSibling.url }}"><i class="fa fa-angle-left"></i> {{ 'THEME_AKSO.BLOG.ITEM.PREV_POST'|t }}</a>
